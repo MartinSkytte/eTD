@@ -1,0 +1,6 @@
+#N canvas 1033 247 450 300 10;
+#X obj 131 21 receive \$1-set-frequency;
+#X obj 131 53 osc~ 440;
+#X obj 132 93 outlet~;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
