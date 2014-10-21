@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class Match3 : MonoBehaviour {
+
 	//Swap speed
 	public float swapSpeed = 10.0f;
 
@@ -21,7 +22,9 @@ public class Match3 : MonoBehaviour {
 		board = new int[10,10];
 		GenBoard();
 	}
-	
+
+
+
 
 	void Update(){
 		//Select block effect
@@ -60,7 +63,7 @@ public class Match3 : MonoBehaviour {
 		for(int x=0; x<board.GetLength(0); x++){
 			for(int y=0; y<board.GetLength(1); y++){
 				int randomNumber = Random.Range(0,blocks.Length); //ID
-				Transform obj = (Transform)Instantiate(blocks[randomNumber].transform, new Vector3(x,y,0), Quaternion.identity);
+				Transform obj = (Transform)Instantiate(blocks[randomNumber].transform, new Vector3(x,y,0), Quaternion.AngleAxis(270, Vector3.up));
 				obj.parent = transform;
 				Block b = obj.gameObject.AddComponent<Block>();
 				//Set values
@@ -349,7 +352,7 @@ public class Match3 : MonoBehaviour {
 			for(int y=0; y<board.GetLength(1); y++){
 				if(board[x,y]==500){
 					int randomNumber = Random.Range(0,blocks.Length); //ID
-					Transform obj = (Transform)Instantiate(blocks[randomNumber].transform, new Vector3(x,y,0), Quaternion.identity);
+					Transform obj = (Transform)Instantiate(blocks[randomNumber].transform, new Vector3(x,y,0),Quaternion.AngleAxis(270, Vector3.up));
 					obj.parent = transform;
 					Block b = obj.gameObject.AddComponent<Block>();
 					//Set values
