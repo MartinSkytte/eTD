@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-using UnityEngine;
-using System.Collections;
+//using UnityEngine;
+//using System.Collections;
 
 public class Block : MonoBehaviour {
 	
@@ -89,7 +89,7 @@ public class Block : MonoBehaviour {
 	}
 
 	public IEnumerator fallDown(){
-		Match3 match;
+		//Match3 match;
 		Block[] allb = FindObjectsOfType(typeof(Block)) as Block[];
 		Vector3 newPos = transform.position;
 		Vector3 lastPos = new Vector3 (transform.position.x, transform.position.y +15, transform.position.z);
@@ -105,14 +105,4 @@ public class Block : MonoBehaviour {
 
 	}
 
-
-
-	
-
-
-	
-
-
-	
-	
 }
