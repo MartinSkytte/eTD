@@ -1,0 +1,44 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class TowerPlacement : MonoBehaviour {
+
+	private TowerBase towerBase;
+	private Transform currentTower;
+	private bool hasPlaced;
+	// Use this for initialization
+	void Start () {
+	
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		if (currentTower && !hasPlaced) {
+			Vector3 m = Input.mousePosition;
+			m = new Vector3(m.x, m.y, transform.position.z);
+			Vector3 p = camera.ScreenToWorldPoint(m);
+			currentTower.position = new Vector3(-p.x,-p.y,0);
+		
+		}
+
+		if (Input.GetMouseButtonDown(0)) {
+				hasPlaced = true;
+
+		}
+	}
+
+	public void setItem(GameObject t){
+		hasPlaced = false;
+		currentTower = ((GameObject)Instantiate (t)).transform;
+		towerBase = currentTower.GetComponent<BasicTower>().GetComponentInChildren<TowerBase>();
+		Debug.Log (towerBase.name);
+	}
+
+	bool isLegalPosition(){
+				if (towerBase.colliders.Count > 0) {
+						return false;
+				} else {
+						return true;
+				}
+		}
+}
