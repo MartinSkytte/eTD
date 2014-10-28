@@ -20,7 +20,8 @@ public class Match3 : MonoBehaviour {
 	private bool swapEffect;
 	
 	private Color blockColor = Color.white;
-	
+
+	public int blocksDestroyed = 0;
 	//private static GUIManager instance;
 	
 	
@@ -337,9 +338,10 @@ public class Match3 : MonoBehaviour {
 			}
 			//Respawn blocks
 			MoveY();
-			currentN += countDD+countLL+countRR+countUU;
-			GUIManager.SetCurrentNumber(countDD+countUU);
-			GUIManager.SetGoalNumber(countLL+countRR);
+
+			GUIManager.SetCurrentNumber(blocksDestroyed);
+			GUIManager.SetGoalNumber(blocksDestroyed);
+			blocksDestroyed = 0;
 			return true;
 		}
 		
@@ -357,6 +359,7 @@ public class Match3 : MonoBehaviour {
 		for(int x=0; x<board.GetLength(0); x++){
 			for(int y=board.GetLength(1)-1; y>=0; y--){//Start from top, go down
 				if(board[x,y]==500){//If we found empty block
+					blocksDestroyed ++;
 					foreach(Block b in allb){
 						if(b.x == x && b.y > y){//Every block above this empty block will be marked
 							b.readyToMove = true;//Mark this block as ready to move

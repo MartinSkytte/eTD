@@ -629,6 +629,7 @@ MonoBehaviour:
   - {fileID: 400000, guid: 6dd84f3e0df567b409a402cc629cec55, type: 2}
   - {fileID: 400000, guid: 3eb5c217a09445a4a835857ef18b33df, type: 2}
   - {fileID: 400000, guid: b0cfa4b03fefe074f85581cf9ded3332, type: 2}
+  blocksDestroyed: 0
 --- !u!23 &1718357816
 Renderer:
   m_ObjectHideFlags: 0
