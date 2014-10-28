@@ -17,26 +17,27 @@ public class Match3 : MonoBehaviour {
 	public Transform[] blocks;
 	
 	//Check if swap effect ended
-	private bool swapEffect;
+	private bool swapEffect, paused;
 	
 	private Color blockColor = Color.white;
 
 	public int blocksDestroyed = 0;
 	//private static GUIManager instance;
-	
+	public float timeLeft;
 	
 	void Start(){
 		board = new int[10,10];
 		GenBoard();
 		GameEventManager.GameStart += GameStart;
 		GameEventManager.GameOver += GameOver;
-
+		paused = true;
 	}
 	
 	
 	void GameOver (){
 		renderer.enabled = true;
 		enabled = true;
+		paused = false;
 	}
 	
 	private void GameStart (){
@@ -46,7 +47,7 @@ public class Match3 : MonoBehaviour {
 		GUIManager.SetCurrentNumber(currentN);
 		goal = 0;//Random.Range (10,100);
 		GUIManager.SetGoalNumber(goal);
-		
+		paused = false;
 	}
 	/*var clones = GameObject.FindGameObjectsWithTag ("clone");
 			foreach (var clone in clones){
@@ -55,6 +56,7 @@ public class Match3 : MonoBehaviour {
 	
 	
 	void Update(){
+
 		if (Input.GetMouseButtonDown(1)) {
 		//	var clones = GameObject.FindGameObjectsWithTag ("clone");
 		//	foreach (var clone in clones){
@@ -69,7 +71,7 @@ public class Match3 : MonoBehaviour {
 		if (currentN == goal) {
 			GameEventManager.TriggerGameWon();
 		}
-		
+
 		//Select block effect
 		if(Block.select){
 			if(blockColor == Color.white){
@@ -98,7 +100,13 @@ public class Match3 : MonoBehaviour {
 				//We can again select new blocks
 			}
 		}
-		
+		if (!paused) {
+			timeLeft -= Time.deltaTime;
+			if (timeLeft < 0)
+				timeLeft = 0;
+			int timeInSeconds = (int)timeLeft;
+			GUIManager.SetCurrentTime(timeInSeconds);
+		}
 	}
 	
 	
