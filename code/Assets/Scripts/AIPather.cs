@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using Pathfinding;
 
@@ -34,7 +34,7 @@ public class AIPather : MonoBehaviour {
 			return;
 
 		Vector3 dir = (path.vectorPath[currentWaypoint] - transform.position).normalized * speed * Time.fixedDeltaTime;
-		transform.position = Vector3.Lerp(transform.position, path.vectorPath[currentWaypoint], speed * Time.deltaTime);
+		transform.position = path.vectorPath [currentWaypoint];
 
 		if(Vector3.Distance(transform.position, path.vectorPath[currentWaypoint]) < maxWaypointDistance)
 			currentWaypoint++;
