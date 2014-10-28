@@ -33,8 +33,7 @@ public class AIPather : MonoBehaviour {
 		if (currentWaypoint >= path.vectorPath.Count)
 			return;
 
-		Vector3 dir = (path.vectorPath[currentWaypoint] - transform.position).normalized * speed * Time.fixedDeltaTime;
-		transform.position = path.vectorPath [currentWaypoint];
+		transform.position = Vector3.Lerp(transform.position, path.vectorPath [currentWaypoint], speed * Time.fixedDeltaTime);
 
 		if(Vector3.Distance(transform.position, path.vectorPath[currentWaypoint]) < maxWaypointDistance)
 			currentWaypoint++;
