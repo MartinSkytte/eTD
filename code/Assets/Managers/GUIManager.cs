@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GUIManager : MonoBehaviour {
 
-	public GUIText CurrentNumberText, GoalNumberText, GameWonText, GameOverText, InstructionsText, MatchText;
+	public GUIText CurrentNumberText, GoalNumberText, GameWonText, GameOverText, InstructionsText, MatchText, TheGameText;
 
 	private static GUIManager instance;
 
@@ -14,6 +14,7 @@ public class GUIManager : MonoBehaviour {
 		GameEventManager.GameOver += GameOver;
 		GameOverText.enabled = false;
 		GameWonText.enabled = false;
+		TheGameText.enabled = true;
 	}
 
 	// Update is called once per frame
@@ -44,6 +45,7 @@ public class GUIManager : MonoBehaviour {
 	private void GameStart(){
 		GameWonText.enabled = false;
 		GameOverText.enabled = false;
+		TheGameText.enabled = false;
 		InstructionsText.enabled = false;
 		enabled = false;
 	}

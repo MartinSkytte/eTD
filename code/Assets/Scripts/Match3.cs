@@ -25,6 +25,8 @@ public class Match3 : MonoBehaviour {
 	
 	
 	void Start(){
+		board = new int[10,10];
+		GenBoard();
 		GameEventManager.GameStart += GameStart;
 		GameEventManager.GameOver += GameOver;
 
@@ -37,8 +39,6 @@ public class Match3 : MonoBehaviour {
 	}
 	
 	private void GameStart (){
-		board = new int[10,10];
-		GenBoard();
 		renderer.enabled = true;
 		enabled = true;
 		currentN = 0;
@@ -338,8 +338,8 @@ public class Match3 : MonoBehaviour {
 			//Respawn blocks
 			MoveY();
 			currentN += countDD+countLL+countRR+countUU;
-			GUIManager.SetCurrentNumber(countD);
-			GUIManager.SetGoalNumber(countU);
+			GUIManager.SetCurrentNumber(countDD+countUU);
+			GUIManager.SetGoalNumber(countLL+countRR);
 			return true;
 		}
 		

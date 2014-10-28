@@ -108,6 +108,7 @@ MonoBehaviour:
   GameOverText: {fileID: 1457619358}
   InstructionsText: {fileID: 1740515437}
   MatchText: {fileID: 410952132}
+  TheGameText: {fileID: 808833304}
 --- !u!4 &5357510
 Transform:
   m_ObjectHideFlags: 0
@@ -171,6 +172,7 @@ Transform:
   - {fileID: 1740515436}
   - {fileID: 410952131}
   - {fileID: 772311954}
+  - {fileID: 808833303}
   m_Father: {fileID: 0}
   m_RootOrder: 2
 --- !u!1 &259441413
@@ -357,6 +359,57 @@ GUIText:
   m_Color:
     serializedVersion: 2
     rgba: 4279308793
+  m_PixelCorrect: 1
+  m_RichText: 1
+--- !u!1 &808833302
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 808833303}
+  - 132: {fileID: 808833304}
+  m_Layer: 0
+  m_Name: TheGameText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &808833303
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 808833302}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .600000024, y: .564999998, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 200106548}
+  m_RootOrder: 6
+--- !u!132 &808833304
+GUIText:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 808833302}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Text: eTD The Game
+  m_Anchor: 0
+  m_Alignment: 0
+  m_PixelOffset: {x: 0, y: 0}
+  m_LineSpacing: 1
+  m_TabSize: 4
+  m_Font: {fileID: 0}
+  m_Material: {fileID: 0}
+  m_FontSize: 50
+  m_FontStyle: 0
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
   m_PixelCorrect: 1
   m_RichText: 1
 --- !u!1 &1174158145
@@ -644,7 +697,7 @@ GUIText:
   m_GameObject: {fileID: 1740515435}
   m_Enabled: 1
   serializedVersion: 3
-  m_Text: Press Space to play And X to quit
+  m_Text: Right click to play / left click to quit
   m_Anchor: 4
   m_Alignment: 0
   m_PixelOffset: {x: 0, y: 0}
