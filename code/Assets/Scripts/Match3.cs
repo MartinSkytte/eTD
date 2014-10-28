@@ -2,31 +2,74 @@
 using System.Collections;
 
 public class Match3 : MonoBehaviour {
-
+	
 	//Swap speed
 	public float swapSpeed = 10.0f;
-
+	
 	//Board
 	public int[,] board;
 	
+	
+	public int goal;
+	
+	public int currentN;
 	//Board blocks
 	public Transform[] blocks;
-
+	
 	//Check if swap effect ended
 	private bool swapEffect;
-
+	
 	private Color blockColor = Color.white;
 
-
+	public int blocksDestroyed = 0;
+	//private static GUIManager instance;
+	
+	
 	void Start(){
 		board = new int[10,10];
 		GenBoard();
+		GameEventManager.GameStart += GameStart;
+		GameEventManager.GameOver += GameOver;
+
 	}
-
-
-
-
+	
+	
+	void GameOver (){
+		renderer.enabled = true;
+		enabled = true;
+	}
+	
+	private void GameStart (){
+		renderer.enabled = true;
+		enabled = true;
+		currentN = 0;
+		GUIManager.SetCurrentNumber(currentN);
+		goal = 0;//Random.Range (10,100);
+		GUIManager.SetGoalNumber(goal);
+		
+	}
+	/*var clones = GameObject.FindGameObjectsWithTag ("clone");
+			foreach (var clone in clones){
+				Destroy(clone);
+			}*/
+	
+	
 	void Update(){
+		if (Input.GetMouseButtonDown(1)) {
+		//	var clones = GameObject.FindGameObjectsWithTag ("clone");
+		//	foreach (var clone in clones){
+		//		Destroy(clone);
+		//	}
+			currentN = 0;
+			GUIManager.SetCurrentNumber(currentN);
+			goal = 0;//Random.Range (10,100);
+			GUIManager.SetGoalNumber(goal);
+			GameEventManager.TriggerGameOver();	
+		}
+		if (currentN == goal) {
+			GameEventManager.TriggerGameWon();
+		}
+		
 		//Select block effect
 		if(Block.select){
 			if(blockColor == Color.white){
@@ -37,7 +80,7 @@ public class Match3 : MonoBehaviour {
 		}
 		
 		if(Block.select && Block.moveTo){ //If 2 blocks are selected, what we need more?
-
+			
 			//Check if they are near each other
 			if(CheckIfNear()==true){
 				//Near
@@ -59,7 +102,10 @@ public class Match3 : MonoBehaviour {
 	}
 	
 	
+	
+	
 	void GenBoard(){
+		
 		for(int x=0; x<board.GetLength(0); x++){
 			for(int y=0; y<board.GetLength(1); y++){
 				int randomNumber = Random.Range(0,blocks.Length); //ID
@@ -101,27 +147,27 @@ public class Match3 : MonoBehaviour {
 		Debug.Log("What are you trying to select!");
 		return false;
 	}
-
+	
 	
 	
 	bool CheckMatch(){
 		//Check for any mistake in the board
 		testBoard ();
-
+		
 		//Get all blocks in scene
 		Block[] allb = FindObjectsOfType(typeof(Block)) as Block[];
 		Block sel = Block.select.gameObject.GetComponent<Block> ();
 		Block mov = Block.moveTo.gameObject.GetComponent<Block> ();
-
-
-
+		
+		
+		
 		//SELECTED BLOCK
 		//Check how many blocks have same ID as our selected block(for each direction)
 		int countU = 0; //Count Up
 		int countD = 0; //Count Down
 		int countL = 0; //Count Left
 		int countR = 0; //Count RIght
-
+		
 		//Check how many same blocks have sam ID...
 		//Left
 		for(int l = sel.x-1; l>=0; l--){
@@ -161,13 +207,13 @@ public class Match3 : MonoBehaviour {
 				break;
 			}
 		}
-
+		
 		//MOVE TO BLOCK
 		int countUU = 0; //Count Up
 		int countDD = 0; //Count Down
 		int countLL = 0; //Count Left
 		int countRR = 0; //Count RIght
-
+		
 		//Check how many same blocks have sam ID...
 		//Left
 		for(int l = mov.x-1; l>=0; l--){
@@ -207,8 +253,8 @@ public class Match3 : MonoBehaviour {
 				break;
 			}
 		}
-
-
+		
+		
 		
 		
 		//Check if there is 3+ match 
@@ -250,9 +296,9 @@ public class Match3 : MonoBehaviour {
 					}
 				}
 			}
-
-
-
+			
+			
+			
 			if(countLL+countRR>=3){
 				//Destroy and mark empty block
 				for(int cl = 0; cl<=countLL; cl++){
@@ -292,34 +338,39 @@ public class Match3 : MonoBehaviour {
 			}
 			//Respawn blocks
 			MoveY();
+
+			GUIManager.SetCurrentNumber(blocksDestroyed);
+			GUIManager.SetGoalNumber(blocksDestroyed);
+			blocksDestroyed = 0;
 			return true;
-			
 		}
 		
+
 		
 		return false;
 	}
 	
-
+	
 	//Move blocks down
 	void MoveY(){
 		Block[] allb = FindObjectsOfType(typeof(Block)) as Block[];
 		int moveDownBy = 0; //How many times we need to move them down?
-
+		
 		for(int x=0; x<board.GetLength(0); x++){
 			for(int y=board.GetLength(1)-1; y>=0; y--){//Start from top, go down
 				if(board[x,y]==500){//If we found empty block
+					blocksDestroyed ++;
 					foreach(Block b in allb){
 						if(b.x == x && b.y > y){//Every block above this empty block will be marked
 							b.readyToMove = true;//Mark this block as ready to move
 							b.y -=1;//New block position
 						}
 					}
-
+					
 					moveDownBy++;//We move thme one more time down
 				}
 			}
-
+			
 			//Find blocks we marked
 			foreach(Block b in allb){
 				if(b.readyToMove){
@@ -336,16 +387,16 @@ public class Match3 : MonoBehaviour {
 		//Respawn blocks
 		Respawn ();
 	}
-
+	
 	//Mark new empty blocks
 	void MarkEmpty(int x, int num){
 		Block[] allb = FindObjectsOfType(typeof(Block)) as Block[];
 		for(int i=0; i<num; i++){
 			board[x,board.GetLength(1)-1-i] = 500;
 		}
-
+		
 	}
-
+	
 	//Just spawn a new blocks at the empty position, but using fall effect
 	void Respawn(){
 		for(int x=0; x<board.GetLength(0); x++){
@@ -363,14 +414,16 @@ public class Match3 : MonoBehaviour {
 					b.fallEffect = true;
 					//Set ID in board at this position
 					board[x,y] = randomNumber;
-
-
+					
+					
 				}
 			}
 		}
+		currentN ++;
+		GUIManager.SetCurrentNumber(currentN);
 	}
-
-
+	
+	
 	//Check for any mistake in the board
 	public void testBoard(){
 		Block[] allb = FindObjectsOfType(typeof(Block)) as Block[];
@@ -385,28 +438,29 @@ public class Match3 : MonoBehaviour {
 				}
 			}
 		}
+		
 	}
 	
-
+	
 	//Swap block effect
 	//checkMatch = true - it will check for match3
 	IEnumerator swapBlockEffect(bool match3){
-
+		
 		Block sel = Block.select.gameObject.GetComponent<Block>();
 		Block mov = Block.moveTo.gameObject.GetComponent<Block>();
-
+		
 		Vector3 selTempPos = sel.transform.position;
 		Vector3 movTempPos = mov.transform.position;
-
+		
 		float time = 0;
-
+		
 		while(time<1){
 			time += Time.deltaTime * swapSpeed;
 			sel.transform.position = Vector3.Lerp(selTempPos, movTempPos, time);
 			mov.transform.position = Vector3.Lerp(movTempPos, selTempPos, time);
 			yield return null;
 		}
-
+		
 		int tempX = sel.x;
 		int tempY = sel.y;
 		
@@ -420,13 +474,13 @@ public class Match3 : MonoBehaviour {
 		//Change ID in board
 		board[sel.x,sel.y]=sel.ID;
 		board[mov.x,mov.y]=mov.ID;
-
-
+		
+		
 		//Do we want to run the code to check for match?
 		if(match3 == true){
 			//Check for match3
 			if(CheckMatch()==true){
-
+				
 				//There is match
 				swapEffect = false;//End effect
 				Block.select.gameObject.renderer.material.color = blockColor;
@@ -446,7 +500,7 @@ public class Match3 : MonoBehaviour {
 		else{//We don't
 			swapEffect = false; //End effect
 		}
-
+		
 	}
-
+	
 }
