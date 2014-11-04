@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-
 public class LevelInfoList : MonoBehaviour {
 
 	//Level info class
