@@ -26,7 +26,7 @@ public class LevelInfoListEditor : Editor {
 
 		EditorGUILayout.Space ();
 		EditorGUILayout.Space ();
-		DisplayFieldType = (displayFieldType)EditorGUILayout.EnumPopup ("", DisplayFieldType);
+		//DisplayFieldType = (displayFieldType)EditorGUILayout.EnumPopup ("", DisplayFieldType);
 
 		ListSize = ThisList.arraySize;
 		ListSize = EditorGUILayout.IntField ("List Size", ListSize);
@@ -41,9 +41,7 @@ public class LevelInfoListEditor : Editor {
 		}
 
 		EditorGUILayout.Space ();
-		EditorGUILayout.Space ();
 		EditorGUILayout.LabelField("Or");
-		EditorGUILayout.Space ();
 		EditorGUILayout.Space ();
 
 		//Or add a new item to the List<> with a button
@@ -55,7 +53,7 @@ public class LevelInfoListEditor : Editor {
 
 		EditorGUILayout.Space ();
 		EditorGUILayout.Space ();
-		
+		EditorGUILayout.BeginVertical();
 		//Display our list to the inspector window
 		for (int i = 0; i < ThisList.arraySize; i++) {
 			SerializedProperty ListRef = ThisList.GetArrayElementAtIndex(i);
@@ -64,37 +62,21 @@ public class LevelInfoListEditor : Editor {
 			SerializedProperty Amount = ListRef.FindPropertyRelative("amount");
 			SerializedProperty Health = ListRef.FindPropertyRelative("health");
 
-			// Display the property fields in two ways.
-			if(DisplayFieldType == 0){// Choose to display automatic or custom field types. This is only for example to help display automatic and custom fields.
-				//1. Automatic, No customization <-- Choose me I'm automatic and easy to setup
-				EditorGUILayout.LabelField("Automatic Field By Property Type");
-				EditorGUILayout.PropertyField(Creep);
-				EditorGUILayout.PropertyField(Target);
-				EditorGUILayout.PropertyField(Amount);
-				EditorGUILayout.PropertyField(Health);
-			}else{
-				//Or
-				
-				//2 : Full custom GUI Layout <-- Choose me I can be fully customized with GUI options.
-				EditorGUILayout.LabelField("Customizable Field With GUI");
-				Creep.objectReferenceValue = EditorGUILayout.ObjectField("Unit Type", Creep.objectReferenceValue, typeof(GameObject), true);
-				Target.objectReferenceValue = EditorGUILayout.ObjectField("Target", Target.objectReferenceValue, typeof(Transform), true);
-				Amount.intValue = EditorGUILayout.IntField("Amount",Amount.intValue);
-				Health.intValue = EditorGUILayout.IntField("Health",Health.intValue);
-			}
-
-			EditorGUILayout.Space ();
+			EditorGUILayout.LabelField("Waves");
+			Creep.objectReferenceValue = EditorGUILayout.ObjectField("Unit Type", Creep.objectReferenceValue, typeof(GameObject), true);
+			Target.objectReferenceValue = EditorGUILayout.ObjectField("Target", Target.objectReferenceValue, typeof(Transform), true);
+			Amount.intValue = EditorGUILayout.IntField("Amount",Amount.intValue);
+			Health.intValue = EditorGUILayout.IntField("Health",Health.intValue);
 
 			//Remove this index from the List
-			EditorGUILayout.LabelField("Remove an index from the List<> with a button");
-			if(GUILayout.Button("Remove This Index (" + i.ToString() + ")")){
+			if(GUILayout.Button("Remove Wave (" + i.ToString() + ")")){
 				ThisList.DeleteArrayElementAtIndex(i);
 			}
-			EditorGUILayout.Space ();
-			EditorGUILayout.Space ();
-			EditorGUILayout.Space ();
+
+
 			EditorGUILayout.Space ();
 		}
+		EditorGUILayout.EndVertical();
 
 		//Apply the changes to our list
 		GetTarget.ApplyModifiedProperties();

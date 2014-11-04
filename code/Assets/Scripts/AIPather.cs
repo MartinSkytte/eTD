@@ -13,6 +13,7 @@ public class AIPather : MonoBehaviour {
 	private int currentWaypoint;
 
 	void Start() {
+		Debug.Log("postion target x: " + target.position.x + " - y: " + target.position.y + " - z: " + target.position.z);
 		seeker = GetComponent<Seeker> ();
 		seeker.StartPath (transform.position, target.position, OnPathComplete);
 	}
