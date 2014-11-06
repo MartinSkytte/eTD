@@ -344,7 +344,7 @@ GUIText:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 772311953}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Text: YOU WIN !!
   m_Anchor: 4
@@ -370,6 +370,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 808833303}
   - 132: {fileID: 808833304}
+  - 23: {fileID: 808833305}
   m_Layer: 0
   m_Name: TheGameText
   m_TagString: Untagged
@@ -412,6 +413,26 @@ GUIText:
     rgba: 4294967295
   m_PixelCorrect: 1
   m_RichText: 1
+--- !u!23 &808833305
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 808833302}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
 --- !u!1 &1174158145
 GameObject:
   m_ObjectHideFlags: 0
@@ -497,7 +518,7 @@ GUIText:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1457619356}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Text: GAME OVER
   m_Anchor: 4
@@ -623,13 +644,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   swapSpeed: 10
   goal: 0
-  currentN: 0
   blocks:
-  - {fileID: 400000, guid: 360f097eda8b6124d9d08ef159ceb2c3, type: 2}
-  - {fileID: 400000, guid: 6dd84f3e0df567b409a402cc629cec55, type: 2}
   - {fileID: 400000, guid: 3eb5c217a09445a4a835857ef18b33df, type: 2}
+  - {fileID: 400000, guid: 360f097eda8b6124d9d08ef159ceb2c3, type: 2}
   - {fileID: 400000, guid: b0cfa4b03fefe074f85581cf9ded3332, type: 2}
+  - {fileID: 400000, guid: 6dd84f3e0df567b409a402cc629cec55, type: 2}
   blocksDestroyed: 0
+  score: 0
+  finalID: 
 --- !u!23 &1718357816
 Renderer:
   m_ObjectHideFlags: 0

@@ -11,7 +11,6 @@ public static class GameEventManager {
 			GameStart();		
 		}
 	}
-
 	public static void TriggerGameOver(){
 		if (GameOver != null) {
 			GameOver();
