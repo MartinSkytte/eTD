@@ -35,7 +35,7 @@ public class spawner : MonoBehaviour {
 	}
 
 	void OnGUI() {
-		if(GUI.Button(new Rect(Screen.width/5,Screen.height/15 + Screen.height/12 * 0,100,30), "Next Wave")) {
+		if(GUI.Button(new Rect(Screen.width/20*8,Screen.height/15 + Screen.height/12 * 0,100,30), "Next Wave")) {
 			try {
 				currentWave++;
 				spawnTime = levelInfo [currentWave].spawnTime;

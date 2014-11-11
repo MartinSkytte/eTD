@@ -10,18 +10,26 @@ public class TowerBase : MonoBehaviour {
 	
 	[HideInInspector]
 	public List<Collider> BuildingColliders = new List<Collider>();
-
+	[HideInInspector]
+	public List<Collider> WallColliders = new List<Collider>();
 
 	void OnTriggerEnter(Collider c){
 		if (c.gameObject.tag == "Building"){
-			Debug.Log (c.gameObject.name);
 			BuildingColliders.Add (c);
 		}
+		if (c.gameObject.layer == LayerMask.NameToLayer("Obstacle")){
+			Debug.Log("");
+			WallColliders.Add (c);
+		}
+
 	}
 	
 	void OnTriggerExit(Collider c){
 		if (c.gameObject.tag == "Building") {
 			BuildingColliders.Remove (c);	
+		}
+		if (c.gameObject.layer == LayerMask.NameToLayer("Obstacle")) {
+			WallColliders.Remove (c);	
 		}
 	}
 

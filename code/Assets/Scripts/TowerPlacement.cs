@@ -19,7 +19,7 @@ public class TowerPlacement : MonoBehaviour {
 			Vector3 m = Input.mousePosition;
 			m = new Vector3(m.x, m.y, transform.position.z);
 			Vector3 p = camera.ScreenToWorldPoint(m);
-			currentTower.position = new Vector3(-p.x,-p.y,0);
+			currentTower.position = new Vector3(Mathf.RoundToInt(-p.x),Mathf.RoundToInt(-p.y),-1);
 		
 		}
 
@@ -43,7 +43,8 @@ public class TowerPlacement : MonoBehaviour {
 	}
 
 	bool isLegalPosition(){
-				if (towerBase.BuildingColliders.Count > 0) {
+		Debug.Log("wallcount "+towerBase.WallColliders.Count);
+				if (towerBase.BuildingColliders.Count > 0 || towerBase.WallColliders.Count <= 0) {
 						return false;
 				} else {
 						return true;

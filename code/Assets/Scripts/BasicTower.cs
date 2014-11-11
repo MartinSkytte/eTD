@@ -13,7 +13,9 @@ public class BasicTower : MonoBehaviour {
 
 
 	void OnTriggerEnter(Collider c){
-		target = c.gameObject.transform;
+		if (c.gameObject.tag == "Enemy") {
+			target = c.gameObject.transform;
+		}
 	}
 
 	void OnTriggerExit(Collider c){
