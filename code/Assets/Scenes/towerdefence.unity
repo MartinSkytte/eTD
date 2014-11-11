@@ -500,6 +500,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2366109febc7c41b6de4a14b605f41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  money: 100
 --- !u!114 &516688647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -512,7 +513,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towers:
-  - {fileID: 100000, guid: 1e6643175b500ab499856b9a95b4c1a8, type: 2}
+  - {fileID: 100002, guid: accfac2d3f0da6e45afcab39abcbd580, type: 2}
 --- !u!1 &767459118
 GameObject:
   m_ObjectHideFlags: 0
