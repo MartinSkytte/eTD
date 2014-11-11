@@ -4,6 +4,7 @@ using System.Collections;
 public class Target : MonoBehaviour {
 
 	void OnTriggerEnter(Collider c) {
-		Destroy(c.gameObject);
+		if(c.gameObject.tag == "Enemy")
+			Destroy(c.gameObject);
 	}
 }
