@@ -5,31 +5,36 @@ using System.Collections.Generic;
 public class spawner : MonoBehaviour {
 
 	public int currentWave;
+	public Transform target;
 	private LevelInfoList infoList;
 	private List<LevelInfoList.LevelInfo> levelInfo;
+	private float spawnTime;
+	private float spawnTimeLeft;
+	private int amount;
 
 	// Use this for initialization
 	void Start () {
 		infoList = (LevelInfoList)gameObject.GetComponent<LevelInfoList> ();
 		levelInfo = infoList.levelsInfo;
-		InitiateNewWave (currentWave);
+		spawnTime = levelInfo [currentWave].spawnTime;
+		spawnTimeLeft = spawnTime;
+		amount = levelInfo [currentWave].amount;
+		Debug.Log ("amount: " + amount + " spawnTime: " + spawnTime);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+		if (spawnTimeLeft <= 0 && amount != 0) {
 
-	private void InitiateNewWave(int waveNumber) {
-		for (int i = 0; i < levelInfo[waveNumber].amount; i++) {
-			GameObject creep = levelInfo[waveNumber].creep;
-			Debug.Log(creep.ToString());
-			AIPather path = creep.AddComponent<AIPather>();
-			path.target = levelInfo[waveNumber].target;
-			path.speed = 5;
-			path.maxWaypointDistance = 0.5f;
+			GameObject creep = (GameObject)Instantiate(levelInfo[currentWave].creep, transform.position, transform.rotation);
+			creep.GetComponent<AIPather>().target = target;
+			creep.GetComponent<AIPather>().maxWaypointDistance = 0.5f;
 
-			Instantiate(creep, transform.position, transform.rotation);
+			Debug.Log ("amount: " + amount + " spawnTime: " + spawnTime);
+			amount--;
+			spawnTimeLeft = spawnTime;
+		} else {
+			spawnTimeLeft -= Time.deltaTime;
 		}
 	}
 }

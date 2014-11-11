@@ -5,6 +5,8 @@ using Pathfinding;
 public class AIPather : MonoBehaviour {
 
 	public Transform target;
+	public Vector3 targetPosition;
+
 	public float speed = 10f;
 	public float maxWaypointDistance = 2f;
 
@@ -13,9 +15,9 @@ public class AIPather : MonoBehaviour {
 	private int currentWaypoint;
 
 	void Start() {
-		Debug.Log("postion target x: " + target.position.x + " - y: " + target.position.y + " - z: " + target.position.z);
+		targetPosition = target.transform.position;
 		seeker = GetComponent<Seeker> ();
-		seeker.StartPath (transform.position, target.position, OnPathComplete);
+		seeker.StartPath (transform.position, targetPosition, OnPathComplete);
 	}
 
 	public void OnPathComplete(Path p) {
