@@ -10,16 +10,12 @@ public class spawner : MonoBehaviour {
 	private List<LevelInfoList.LevelInfo> levelInfo;
 	private float spawnTime;
 	private float spawnTimeLeft;
-	private int amount;
+	private int amount = 0;
 
 	// Use this for initialization
 	void Start () {
 		infoList = (LevelInfoList)gameObject.GetComponent<LevelInfoList> ();
 		levelInfo = infoList.levelsInfo;
-		spawnTime = levelInfo [currentWave].spawnTime;
-		spawnTimeLeft = spawnTime;
-		amount = levelInfo [currentWave].amount;
-		Debug.Log ("amount: " + amount + " spawnTime: " + spawnTime);
 	}
 	
 	// Update is called once per frame
@@ -30,11 +26,23 @@ public class spawner : MonoBehaviour {
 			creep.GetComponent<AIPather>().target = target;
 			creep.GetComponent<AIPather>().maxWaypointDistance = 0.5f;
 
-			Debug.Log ("amount: " + amount + " spawnTime: " + spawnTime);
 			amount--;
 			spawnTimeLeft = spawnTime;
 		} else {
 			spawnTimeLeft -= Time.deltaTime;
+		}
+	}
+
+	void OnGUI() {
+		if(GUI.Button(new Rect(Screen.width/5,Screen.height/15 + Screen.height/12 * 0,100,30), "Next Wave")) {
+			try {
+				currentWave++;
+				spawnTime = levelInfo [currentWave].spawnTime;
+				spawnTimeLeft = spawnTime;
+				amount = levelInfo [currentWave].amount;
+			} catch (UnityException ue) {
+				Debug.Log(ue.Message);
+			}
 		}
 	}
 }
