@@ -38,12 +38,12 @@ public class TowerPlacement : MonoBehaviour {
 	public void setItem(GameObject t){
 		hasPlaced = false;
 		currentTower = ((GameObject)Instantiate (t)).transform;
-		towerBase = currentTower.GetComponent<TowerBase> ();
+		towerBase = currentTower.GetComponentInChildren<TowerBase> ();
 
 	}
 
 	bool isLegalPosition(){
-				if (towerBase.colliders.Count > 0) {
+				if (towerBase.BuildingColliders.Count > 0) {
 						return false;
 				} else {
 						return true;
