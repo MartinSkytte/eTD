@@ -157,8 +157,8 @@ public class Match3 : MonoBehaviour {
 				Block b = obj.gameObject.AddComponent<Block>();
 				//Set values
 				b.ID = randomNumber;
-				b.x = x;
-				b.y = y;
+				b.x =x;
+				b.y =y;
 				//Set ID in board at this position
 				board[x,y] = randomNumber;
 			}
@@ -472,8 +472,8 @@ public class Match3 : MonoBehaviour {
 		for(int x=0; x<board.GetLength(0); x++){
 			for(int y=0; y<board.GetLength(1); y++){
 				if(board[x,y]==500){
-					int randomNumber = Random.Range(0,blocks.Length); //ID
-					Transform obj = (Transform)Instantiate(blocks[randomNumber].transform, new Vector3(x,y,0),Quaternion.AngleAxis(270, Vector3.up));
+					int randomNumber = Random.Range(0,4); //ID
+					Transform obj = (Transform)Instantiate(blocks[randomNumber].transform, new Vector3(x,y,0), Quaternion.AngleAxis(270, Vector3.up));
 					obj.parent = transform;
 					Block b = obj.gameObject.AddComponent<Block>();
 					//Set values

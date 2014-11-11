@@ -56,7 +56,7 @@ public class GUIManager : MonoBehaviour {
 	}
 
 	public static void SetCredits(int credits){
-		instance.CreditsText.text = credits.ToString ();
+		instance.CreditsText.text = credits.ToString ()+ "$";
 	}
 
 	private void GameOver(){
