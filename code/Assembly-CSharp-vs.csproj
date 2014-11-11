@@ -128,8 +128,15 @@
      <Compile Include="Assets\Scripts\AIPather.cs" />
      <Compile Include="Assets\Scripts\BasicProjectile.cs" />
      <Compile Include="Assets\Scripts\BasicTower.cs" />
+     <Compile Include="Assets\Scripts\BasicUnit.cs" />
      <Compile Include="Assets\Scripts\Block.cs" />
+     <Compile Include="Assets\Scripts\LevelInfoList.cs" />
      <Compile Include="Assets\Scripts\Match3.cs" />
+     <Compile Include="Assets\Scripts\PlayerBase.cs" />
+     <Compile Include="Assets\Scripts\TowerBase.cs" />
+     <Compile Include="Assets\Scripts\TowerManager.cs" />
+     <Compile Include="Assets\Scripts\TowerPlacement.cs" />
+     <Compile Include="Assets\Scripts\spawner.cs" />
      <None Include="Assets\AstarPathfindingProject\Editor\EditorAssets\Materials\Navmesh2.shader" />
      <None Include="Assets\AstarPathfindingProject\Plugins\DotNetZip\License.txt" />
      <None Include="Assets\AstarPathfindingProject\ExampleScenes\Materials\Projector Multiply.shader" />

@@ -7,14 +7,14 @@ Library/
 =====================================
 Visual Studio / MonoDevelop generated
 =====================================
-ExportedObj/
-obj/
+code/ExportedObj/
+code/obj/
 *.svd
 *.userprefs
-/*.csproj
+code/*.csproj
 *.pidb
 *.suo
-/*.sln
+code/*.sln
 *.user
 *.unityproj
 *.booproj
@@ -29,5 +29,7 @@ OS generated
 .Trashes
 ehthumbs.db
 Thumbs.db
+*.csproj
+*.sln
 *.csproj
 *.sln
