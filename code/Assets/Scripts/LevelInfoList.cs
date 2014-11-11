@@ -12,6 +12,7 @@ public class LevelInfoList : MonoBehaviour {
 		public Transform target;
 		public int amount;
 		public int health;
+		public float spawnTime;
 	}
 
 	public List<LevelInfo> levelsInfo = new List<LevelInfo> (1);

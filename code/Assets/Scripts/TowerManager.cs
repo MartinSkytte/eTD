@@ -19,9 +19,11 @@ public class TowerManager : MonoBehaviour {
 
 	void OnGUI() {
 		for (int i = 0; i < towers.Length; i++) {
-			if(GUI.Button(new Rect(Screen.width/20,Screen.height/15 + Screen.height/12 * i,100,30),towers[i].name)){
+			if(GUI.Button(new Rect(Screen.width/20,Screen.height/15 + Screen.height/12 * i,120,30),towers[i].name + " (10$)")){
 				towerPlacement.setItem(towers[i]);
 			}	
+		
+			GUI.Box(new Rect(Screen.width/20*4,Screen.height/15,150,30), "money:"+" "+towerPlacement.money.ToString()+"$");
 		
 		}
 
