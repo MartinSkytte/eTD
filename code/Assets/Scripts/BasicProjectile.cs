@@ -17,4 +17,11 @@ public class BasicProjectile : MonoBehaviour {
 			Destroy(gameObject);		
 		}
 	}
+
+	void OnTriggerEnter(Collider c){
+		if (c.gameObject.transform.tag == "Enemy") {
+			Destroy(c.gameObject);
+			Destroy(gameObject);
+		}
+	}
 }

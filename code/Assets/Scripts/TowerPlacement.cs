@@ -6,6 +6,8 @@ public class TowerPlacement : MonoBehaviour {
 	private TowerBase towerBase;
 	private Transform currentTower;
 	private bool hasPlaced;
+
+	public int money;
 	// Use this for initialization
 	void Start () {
 	
@@ -22,16 +24,22 @@ public class TowerPlacement : MonoBehaviour {
 		}
 
 		if (Input.GetMouseButtonDown(0)) {
-				hasPlaced = true;
-
+			if(isLegalPosition()){
+				if (money >= towerBase.price) {
+					if(hasPlaced == false){
+						money -= towerBase.price;
+					}
+					hasPlaced = true;
+				}
+			}
 		}
 	}
 
 	public void setItem(GameObject t){
 		hasPlaced = false;
 		currentTower = ((GameObject)Instantiate (t)).transform;
-		towerBase = currentTower.GetComponent<BasicTower>().GetComponentInChildren<TowerBase>();
-		Debug.Log (towerBase.name);
+		towerBase = currentTower.GetComponent<TowerBase> ();
+
 	}
 
 	bool isLegalPosition(){

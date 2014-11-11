@@ -184,7 +184,7 @@ Transform:
   - {fileID: 413673155}
   - {fileID: 1968904916}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!1 &282137980
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,7 +439,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 5759555a8c23f534c8032a4650987414, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 5759555a8c23f534c8032a4650987414, type: 2}
       propertyPath: target
@@ -548,6 +548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2366109febc7c41b6de4a14b605f41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  money: 100
 --- !u!114 &516688647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -560,7 +561,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   towers:
-  - {fileID: 0}
+  - {fileID: 100002, guid: accfac2d3f0da6e45afcab39abcbd580, type: 2}
 --- !u!1 &767459118
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,7 +588,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
 --- !u!1 &880707596
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,7 +955,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: a02053bc2c9857a48bd9fce0a9523970, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: a02053bc2c9857a48bd9fce0a9523970, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a02053bc2c9857a48bd9fce0a9523970, type: 2}
@@ -1266,7 +1271,7 @@ Transform:
   m_Children:
   - {fileID: 1387365041}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!114 &1964571012
 MonoBehaviour:
   m_ObjectHideFlags: 0

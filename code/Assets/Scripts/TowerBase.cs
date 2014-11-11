@@ -4,13 +4,14 @@ using System.Collections.Generic;
 
 public class TowerBase : MonoBehaviour {
 
+	public int price = 10;
+
 	
 	[HideInInspector]
 	public List<Collider> colliders = new List<Collider>();
 
 	void OnTriggerEnter(Collider c){
 		colliders.Add (c);
-		Debug.Log ("entered");
 	}
 	
 	void OnTriggerExit(Collider c){
