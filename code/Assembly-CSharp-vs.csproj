@@ -133,6 +133,7 @@
      <Compile Include="Assets\Scripts\LevelInfoList.cs" />
      <Compile Include="Assets\Scripts\Match3.cs" />
      <Compile Include="Assets\Scripts\PlayerBase.cs" />
+     <Compile Include="Assets\Scripts\Target.cs" />
      <Compile Include="Assets\Scripts\TowerBase.cs" />
      <Compile Include="Assets\Scripts\TowerManager.cs" />
      <Compile Include="Assets\Scripts\TowerPlacement.cs" />

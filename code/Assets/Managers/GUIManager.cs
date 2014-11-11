@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GUIManager : MonoBehaviour {
 
-	public GUIText CurrentNumberText, GoalNumberText, GameWonText, GameOverText, InstructionsText, MatchText, TheGameText, TimerText;
+	public GUIText CurrentNumberText, GoalNumberText, GameWonText, GameOverText, InstructionsText, MatchText, TheGameText;//, TimerText;
 
 	private static GUIManager instance;
 
@@ -52,9 +52,9 @@ public class GUIManager : MonoBehaviour {
 		instance.GoalNumberText.text = goalN.ToString();
 	}
 
-	public static void SetCurrentTime(int currentT){//countdown timer in seconds
-		instance.TimerText.text = currentT.ToString();
-	}
+//	public static void SetCurrentTime(int currentT){//countdown timer in seconds
+	//	instance.TimerText.text = currentT.ToString();
+	//}
 
 	private void GameOver(){
 		//SetMidText ("Lost");
