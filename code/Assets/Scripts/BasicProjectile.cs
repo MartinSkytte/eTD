@@ -5,6 +5,7 @@ public class BasicProjectile : MonoBehaviour {
 
 	public float range = 10;
 	public float speed = 1;
+	public int damage = 2;
 
 	private float distance;
 	
@@ -20,8 +21,7 @@ public class BasicProjectile : MonoBehaviour {
 
 	void OnTriggerEnter(Collider c){
 		if (c.gameObject.transform.tag == "Enemy") {
-			Destroy(c.gameObject);
-			Destroy(gameObject);
+			c.GetComponent<UnitHealth>().TakeDamage(damage);
 		}
 	}
 }

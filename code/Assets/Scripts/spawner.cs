@@ -25,6 +25,7 @@ public class spawner : MonoBehaviour {
 			GameObject creep = (GameObject)Instantiate(levelInfo[currentWave].creep, transform.position, transform.rotation);
 			creep.GetComponent<AIPather>().target = target;
 			creep.GetComponent<AIPather>().maxWaypointDistance = 0.5f;
+			creep.GetComponent<UnitHealth>().health = levelInfo[currentWave].health;
 
 			amount--;
 			spawnTimeLeft = spawnTime;
