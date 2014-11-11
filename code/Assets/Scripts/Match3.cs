@@ -15,7 +15,7 @@ public class Match3 : MonoBehaviour {
 	public Transform[] blocks;
 	
 	//Check if swap effect ended
-	private bool swapEffect;//, paused;
+	private bool swapEffect, paused;
 	
 	private Color blockColor = Color.white;
 
@@ -23,36 +23,69 @@ public class Match3 : MonoBehaviour {
 
 	public int score=0;
 
+	public int credits = 0;
+
 	public string finalID;
 
-	//private static GUIManager instance;
-	//public float timeLeft;
+	public float scale = 0;
+
+
+	private static GUIManager instance;
+
+	public float timeLeft;
 	
 	void Start(){
-		GameEventManager.GameStart += GameStart;
-		GameEventManager.GameOver += GameOver;
 		GameEventManager.GameWon += GameWon;
-		//GUIManager.SetMidText("Start");
+		GameEventManager.GameOver += GameOver;
+		GameEventManager.GameStart += GameStart;
+		GUIManager.SetMidText("Start");
 		board = new int[10,10];
 		GenBoard();
-		//paused = true;
+		paused = true;
+		GUIManager.SetCredits (credits);
 	}
 
 	void GameWon(){
+		CreditManager();
+		timeLeft = 0;
 		renderer.enabled = false;
 		enabled = false;
 	}
 
+	void CreditManager(){
+		scale = (float)score / (float)goal;
+		Debug.Log ("scale:" + scale + "score:" + score + "goal:" + goal);
+		if (goal != 0) {
+						if (scale > 2 || scale <= 0) {
+								credits += 0;		
+						} else {
+								credits += (int)Mathf.FloorToInt (100 * (2 - scale));
+								Debug.Log ("credits:" + credits);
+						}
+						/*if (score >= goal) {
+			credits += 100;
+		} else if ((score*1000 / goal) <= 1050) {
+			credits += 50;		
+		} else {
+			credits += 0;		
+		}*/
+						GUIManager.SetCredits (credits);
+				}
+	}
+
 	void GameOver (){
+		paused = true;
+		CreditManager();
+		timeLeft = 0;
 		renderer.enabled = true;
 		enabled = true;
-		//paused = false;
 	}
 	
 	private void GameStart (){
-		//paused = false;
+		paused = false;
 		renderer.enabled = true;
 		enabled = true;
+		GUIManager.SetMidText("Nothing");
 		score = 0;
 		GUIManager.SetCurrentNumber(score);
 		goal = Random.Range(10,100);
@@ -67,11 +100,11 @@ public class Match3 : MonoBehaviour {
 			GUIManager.SetCurrentNumber(score);
 			GameEventManager.TriggerGameOver();	
 		}
-		if (score == goal) {
-			GameEventManager.TriggerGameWon();
-		}else if(score > goal){
-			GameEventManager.TriggerGameOver();
-		}
+		//if ((score == goal || score > goal)&& !WinLose) {
+		//	GameEventManager.TriggerGameOver();
+		//}//else if(score > goal){
+			//GameEventManager.TriggerGameOver();
+	//	}
 		
 		//Select  block effect
 
@@ -103,13 +136,12 @@ public class Match3 : MonoBehaviour {
 				//We can again select new blocks
 			}
 		}
-		/*if (!paused) {
-			timeLeft -= Time.deltaTime;
-			if (timeLeft < 0)
-				timeLeft = 0;
+		if (!paused) {
+			timeLeft += Time.deltaTime;
+			if (timeLeft < 0)timeLeft = 0;
 			int timeInSeconds = (int)timeLeft;
 			GUIManager.SetCurrentTime(timeInSeconds);
-		}*/
+		}
 	}
 	
 	
@@ -119,15 +151,14 @@ public class Match3 : MonoBehaviour {
 		
 		for(int x=0; x<board.GetLength(0); x++){
 			for(int y=0; y<board.GetLength(1); y++){
-				Debug.Log("x: " + x + " y: " + y);
 				int randomNumber = Random.Range(0,4); //ID
 				Transform obj = (Transform)Instantiate(blocks[randomNumber].transform, new Vector3(x,y,0), Quaternion.AngleAxis(270, Vector3.up));
 				obj.parent = transform;
 				Block b = obj.gameObject.AddComponent<Block>();
 				//Set values
 				b.ID = randomNumber;
-				b.x = x;
-				b.y = y;
+				b.x =x;
+				b.y =y;
 				//Set ID in board at this position
 				board[x,y] = randomNumber;
 			}
@@ -356,9 +387,10 @@ public class Match3 : MonoBehaviour {
 			MoveY();
 			//score = setScore (finalID, blocksDestroyed);
 			GUIManager.SetCurrentNumber(score);
-			blocksDestroyed = 0;
-
-
+			if (score == goal || score > goal) {
+				GameEventManager.TriggerGameOver();
+			}
+			//blocksDestroyed = 0;
 			return true;
 		}
 		
@@ -440,8 +472,8 @@ public class Match3 : MonoBehaviour {
 		for(int x=0; x<board.GetLength(0); x++){
 			for(int y=0; y<board.GetLength(1); y++){
 				if(board[x,y]==500){
-					int randomNumber = Random.Range(0,blocks.Length); //ID
-					Transform obj = (Transform)Instantiate(blocks[randomNumber].transform, new Vector3(x,y,0),Quaternion.AngleAxis(270, Vector3.up));
+					int randomNumber = Random.Range(0,4); //ID
+					Transform obj = (Transform)Instantiate(blocks[randomNumber].transform, new Vector3(x,y,0), Quaternion.AngleAxis(270, Vector3.up));
 					obj.parent = transform;
 					Block b = obj.gameObject.AddComponent<Block>();
 					//Set values

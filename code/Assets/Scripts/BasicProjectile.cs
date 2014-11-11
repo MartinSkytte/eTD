@@ -22,6 +22,10 @@ public class BasicProjectile : MonoBehaviour {
 	void OnTriggerEnter(Collider c){
 		if (c.gameObject.transform.tag == "Enemy") {
 			c.GetComponent<UnitHealth>().TakeDamage(damage);
+<<<<<<< HEAD
+=======
+			Destroy(gameObject);
+>>>>>>> origin/master
 		}
 	}
 }
