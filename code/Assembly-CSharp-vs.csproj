@@ -128,9 +128,15 @@
      <Compile Include="Assets\Scripts\AIPather.cs" />
      <Compile Include="Assets\Scripts\BasicProjectile.cs" />
      <Compile Include="Assets\Scripts\BasicTower.cs" />
+     <Compile Include="Assets\Scripts\BasicUnit.cs" />
      <Compile Include="Assets\Scripts\Block.cs" />
      <Compile Include="Assets\Scripts\LevelInfoList.cs" />
      <Compile Include="Assets\Scripts\Match3.cs" />
+<<<<<<< HEAD
+=======
+     <Compile Include="Assets\Scripts\PlayerBase.cs" />
+     <Compile Include="Assets\Scripts\Target.cs" />
+>>>>>>> origin/master
      <Compile Include="Assets\Scripts\TowerBase.cs" />
      <Compile Include="Assets\Scripts\TowerManager.cs" />
      <Compile Include="Assets\Scripts\TowerPlacement.cs" />

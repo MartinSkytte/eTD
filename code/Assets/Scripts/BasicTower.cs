@@ -31,7 +31,7 @@ public class BasicTower : MonoBehaviour {
 		if (target){
 				if (Time.time >= nextFireTime) {
 						nextFireTime = Time.time + reloadTime;
-						this.transform.rotation = Quaternion.LookRotation(target.localPosition);
+						this.transform.LookAt(target.localPosition);
 						Instantiate (projectile, transform.position, transform.rotation);
 				}	
 		}

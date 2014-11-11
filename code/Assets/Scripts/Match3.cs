@@ -8,68 +8,73 @@ public class Match3 : MonoBehaviour {
 	
 	//Board
 	public int[,] board;
-	
-	
+
 	public int goal;
-	
-	public int currentN;
+
 	//Board blocks
 	public Transform[] blocks;
 	
 	//Check if swap effect ended
-	private bool swapEffect;
+	private bool swapEffect;//, paused;
 	
 	private Color blockColor = Color.white;
 
 	public int blocksDestroyed = 0;
+
+	public int score=0;
+
+	public string finalID;
+
 	//private static GUIManager instance;
-	
+	//public float timeLeft;
 	
 	void Start(){
-		board = new int[10,10];
-		GenBoard();
 		GameEventManager.GameStart += GameStart;
 		GameEventManager.GameOver += GameOver;
-
+		GameEventManager.GameWon += GameWon;
+		//GUIManager.SetMidText("Start");
+		board = new int[10,10];
+		GenBoard();
+		//paused = true;
 	}
-	
-	
+
+	void GameWon(){
+		renderer.enabled = false;
+		enabled = false;
+	}
+
 	void GameOver (){
 		renderer.enabled = true;
 		enabled = true;
+		//paused = false;
 	}
 	
 	private void GameStart (){
+		//paused = false;
 		renderer.enabled = true;
 		enabled = true;
-		currentN = 0;
-		GUIManager.SetCurrentNumber(currentN);
-		goal = 0;//Random.Range (10,100);
+		score = 0;
+		GUIManager.SetCurrentNumber(score);
+		goal = Random.Range(10,100);
 		GUIManager.SetGoalNumber(goal);
-		
+
 	}
-	/*var clones = GameObject.FindGameObjectsWithTag ("clone");
-			foreach (var clone in clones){
-				Destroy(clone);
-			}*/
-	
-	
+
 	void Update(){
+
 		if (Input.GetMouseButtonDown(1)) {
-		//	var clones = GameObject.FindGameObjectsWithTag ("clone");
-		//	foreach (var clone in clones){
-		//		Destroy(clone);
-		//	}
-			currentN = 0;
-			GUIManager.SetCurrentNumber(currentN);
-			goal = 0;//Random.Range (10,100);
-			GUIManager.SetGoalNumber(goal);
+			score = 0;
+			GUIManager.SetCurrentNumber(score);
 			GameEventManager.TriggerGameOver();	
 		}
-		if (currentN == goal) {
+		if (score == goal) {
 			GameEventManager.TriggerGameWon();
+		}else if(score > goal){
+			GameEventManager.TriggerGameOver();
 		}
 		
+		//Select  block effect
+
 		//Select block effect
 		if(Block.select){
 			if(blockColor == Color.white){
@@ -98,7 +103,13 @@ public class Match3 : MonoBehaviour {
 				//We can again select new blocks
 			}
 		}
-		
+		/*if (!paused) {
+			timeLeft -= Time.deltaTime;
+			if (timeLeft < 0)
+				timeLeft = 0;
+			int timeInSeconds = (int)timeLeft;
+			GUIManager.SetCurrentTime(timeInSeconds);
+		}*/
 	}
 	
 	
@@ -108,7 +119,8 @@ public class Match3 : MonoBehaviour {
 		
 		for(int x=0; x<board.GetLength(0); x++){
 			for(int y=0; y<board.GetLength(1); y++){
-				int randomNumber = Random.Range(0,blocks.Length); //ID
+				Debug.Log("x: " + x + " y: " + y);
+				int randomNumber = Random.Range(0,4); //ID
 				Transform obj = (Transform)Instantiate(blocks[randomNumber].transform, new Vector3(x,y,0), Quaternion.AngleAxis(270, Vector3.up));
 				obj.parent = transform;
 				Block b = obj.gameObject.AddComponent<Block>();
@@ -219,6 +231,7 @@ public class Match3 : MonoBehaviour {
 		for(int l = mov.x-1; l>=0; l--){
 			if(board[l,mov.y]==mov.ID){//If block have same ID
 				countLL++;
+
 			}
 			if(board[l,mov.y]!=mov.ID){//If block have same ID
 				break;
@@ -228,6 +241,7 @@ public class Match3 : MonoBehaviour {
 		for(int r = mov.x; r<board.GetLength(0); r++){
 			if(board[r,mov.y]==mov.ID){//If block have same ID
 				countRR++;
+
 			}
 			if(board[r,mov.y]!=mov.ID){//If block have same ID
 				break;
@@ -237,6 +251,7 @@ public class Match3 : MonoBehaviour {
 		for(int d = mov.y-1; d>=0; d--){
 			if(board[mov.x,d]==mov.ID){
 				countDD++;
+
 			}
 			if(board[mov.x,d]!=mov.ID){
 				break;
@@ -265,7 +280,7 @@ public class Match3 : MonoBehaviour {
 					foreach(Block b in allb){
 						if(b.x == sel.x-cl && b.y == sel.y){
 							b.StartCoroutine("destroyBlock");
-							board[b.x,b.y] = 500; //To mark empty block
+							board[b.x,b.y] += 500; //To mark empty block
 						}
 					}
 				}
@@ -273,7 +288,7 @@ public class Match3 : MonoBehaviour {
 					foreach(Block b in allb){
 						if(b.x == sel.x+cr && b.y == sel.y){
 							b.StartCoroutine("destroyBlock");
-							board[b.x,b.y] = 500; //To mark empty block
+							board[b.x,b.y] += 500; //To mark empty block
 						}
 					}
 				}
@@ -282,7 +297,7 @@ public class Match3 : MonoBehaviour {
 				for(int cd = 0; cd<=countD; cd++){
 					foreach(Block blc in allb){
 						if(blc.x == sel.x && blc.y == sel.y - cd){
-							board[blc.x, blc.y] = 500;
+							board[blc.x, blc.y] += 500;
 							blc.StartCoroutine("destroyBlock");
 						}
 					}
@@ -290,7 +305,7 @@ public class Match3 : MonoBehaviour {
 				for(int cu = 0; cu<countU; cu++){
 					foreach(Block blc in allb){
 						if(blc.x == sel.x && blc.y == sel.y+cu){
-							board[blc.x, blc.y] = 500;
+							board[blc.x, blc.y] += 500;
 							blc.StartCoroutine("destroyBlock");
 						}
 					}
@@ -305,15 +320,16 @@ public class Match3 : MonoBehaviour {
 					foreach(Block b in allb){
 						if(b.x == mov.x-cl && b.y == mov.y){
 							b.StartCoroutine("destroyBlock");
-							board[b.x,b.y] = 500; //To mark empty block
+							board[b.x,b.y] += 500; //To mark empty block
 						}
 					}
 				}
 				for(int cr = 0; cr<countRR; cr++){
+
 					foreach(Block b in allb){
 						if(b.x == mov.x+cr && b.y == mov.y){
 							b.StartCoroutine("destroyBlock");
-							board[b.x,b.y] = 500; //To mark empty block
+							board[b.x,b.y] += 500; //To mark empty block
 						}
 					}
 				}
@@ -322,7 +338,7 @@ public class Match3 : MonoBehaviour {
 				for(int cd = 0; cd<=countDD; cd++){
 					foreach(Block blc in allb){
 						if(blc.x == mov.x && blc.y == mov.y - cd){
-							board[blc.x, blc.y] = 500;
+							board[blc.x, blc.y] += 500;
 							blc.StartCoroutine("destroyBlock");
 						}
 					}
@@ -330,7 +346,7 @@ public class Match3 : MonoBehaviour {
 				for(int cu = 0; cu<countUU; cu++){
 					foreach(Block blc in allb){
 						if(blc.x == mov.x && blc.y == mov.y+cu){
-							board[blc.x, blc.y] = 500;
+							board[blc.x, blc.y] += 500;
 							blc.StartCoroutine("destroyBlock");
 						}
 					}
@@ -338,10 +354,11 @@ public class Match3 : MonoBehaviour {
 			}
 			//Respawn blocks
 			MoveY();
-
-			GUIManager.SetCurrentNumber(blocksDestroyed);
-			GUIManager.SetGoalNumber(blocksDestroyed);
+			//score = setScore (finalID, blocksDestroyed);
+			GUIManager.SetCurrentNumber(score);
 			blocksDestroyed = 0;
+
+
 			return true;
 		}
 		
@@ -350,7 +367,24 @@ public class Match3 : MonoBehaviour {
 		return false;
 	}
 	
+	int setScore(string theID){//, int numBlocks){
+		switch (theID) {
+		case "0": //Red block
+			score += 1;
+			break;
+		case "1": //Blue block
+			score += 2;
+			break;
+		case "2": //Yellow block
+			score += 3;
+			break;
+		case "3": //Green block
+			score += 4;
+			break;
+		}
+		return score;
 	
+	}
 	//Move blocks down
 	void MoveY(){
 		Block[] allb = FindObjectsOfType(typeof(Block)) as Block[];
@@ -358,16 +392,20 @@ public class Match3 : MonoBehaviour {
 		
 		for(int x=0; x<board.GetLength(0); x++){
 			for(int y=board.GetLength(1)-1; y>=0; y--){//Start from top, go down
-				if(board[x,y]==500){//If we found empty block
+				if(board[x,y]>=500){//If we found empty block
 					blocksDestroyed ++;
+					string c =board[x,y].ToString();
+					finalID = c[c.Length-1].ToString();
+					setScore(finalID);
 					foreach(Block b in allb){
 						if(b.x == x && b.y > y){//Every block above this empty block will be marked
 							b.readyToMove = true;//Mark this block as ready to move
 							b.y -=1;//New block position
+
 						}
 					}
 					
-					moveDownBy++;//We move thme one more time down
+					moveDownBy++;//We move them one more time down
 				}
 			}
 			
@@ -419,8 +457,6 @@ public class Match3 : MonoBehaviour {
 				}
 			}
 		}
-		currentN ++;
-		GUIManager.SetCurrentNumber(currentN);
 	}
 	
 	

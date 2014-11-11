@@ -61,12 +61,14 @@ public class LevelInfoListEditor : Editor {
 			SerializedProperty Target = ListRef.FindPropertyRelative("target");
 			SerializedProperty Amount = ListRef.FindPropertyRelative("amount");
 			SerializedProperty Health = ListRef.FindPropertyRelative("health");
+			SerializedProperty SpawnTime = ListRef.FindPropertyRelative("spawnTime");
 
 			EditorGUILayout.LabelField("Waves");
 			Creep.objectReferenceValue = EditorGUILayout.ObjectField("Unit Type", Creep.objectReferenceValue, typeof(GameObject), true);
 			Target.objectReferenceValue = EditorGUILayout.ObjectField("Target", Target.objectReferenceValue, typeof(Transform), true);
 			Amount.intValue = EditorGUILayout.IntField("Amount",Amount.intValue);
 			Health.intValue = EditorGUILayout.IntField("Health",Health.intValue);
+			SpawnTime.floatValue = EditorGUILayout.FloatField("Spawn time", SpawnTime.floatValue);
 
 			//Remove this index from the List
 			if(GUILayout.Button("Remove Wave (" + i.ToString() + ")")){
