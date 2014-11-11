@@ -1,12 +1,7 @@
-=============== 
-Unity generated
-===============
+
 Temp/
 Library/
 
-=====================================
-Visual Studio / MonoDevelop generated
-=====================================
 code/ExportedObj/
 code/obj/
 *.svd
@@ -19,9 +14,6 @@ code/*.sln
 *.unityproj
 *.booproj
 
-============
-OS generated
-============
 .DS_Store
 .DS_Store?
 ._*
@@ -35,3 +27,9 @@ Thumbs.db
 *.sln
 *.csproj
 *.sln
+code/Assembly-CSharp-Editor-vs.csproj
+code/Assembly-CSharp-Editor.csproj
+code/Assembly-CSharp-vs.csproj
+code/Assembly-CSharp.csproj
+code/code-csharp.sln
+code/code.sln
