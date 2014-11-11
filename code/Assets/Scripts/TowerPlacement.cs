@@ -19,7 +19,7 @@ public class TowerPlacement : MonoBehaviour {
 			Vector3 m = Input.mousePosition;
 			m = new Vector3(m.x, m.y, transform.position.z);
 			Vector3 p = camera.ScreenToWorldPoint(m);
-			currentTower.position = new Vector3(Mathf.RoundToInt(-p.x),Mathf.RoundToInt(-p.y),-1);
+			currentTower.position = new Vector3(Mathf.Round(-p.x),Mathf.Round(-p.y),-1);
 		
 		}
 
