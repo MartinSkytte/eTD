@@ -11,6 +11,8 @@ public class GUIManager : MonoBehaviour {
 	void Start () {
 		instance = this;
 
+		CreditsText.enabled = false;
+
 		GameEventManager.GameWon += GameWon;
 		GameEventManager.GameOver += GameOver;
 		GameEventManager.GameStart += GameStart;
@@ -56,7 +58,7 @@ public class GUIManager : MonoBehaviour {
 	}
 
 	public static void SetCredits(int credits){
-		instance.CreditsText.text = credits.ToString ()+ "$";
+		//instance.CreditsText.text = credits.ToString ()+ "$";
 	}
 
 	private void GameOver(){
