@@ -7,9 +7,17 @@ public class GUIManager : MonoBehaviour {
 
 	private static GUIManager instance;
 
+	public GameObject[] towers;
+	
+	private TowerPlacement towerPlacement;
+	private spawner spawn;
+
 	// Use this for initialization
 	void Start () {
+		towerPlacement = GameObject.Find ("Managers").GetComponent<TowerPlacement> ();
+		spawn = GameObject.Find("Spawn").GetComponent<spawner>();
 		instance = this;
+		this.OnGUI ();
 
 		CreditsText.enabled = false;
 
@@ -80,5 +88,17 @@ public class GUIManager : MonoBehaviour {
 		enabled = true;
 	}
 
+	void OnGUI() {
+		for (int i = 0; i < towers.Length; i++) {
+			if(GUI.Button(new Rect(Screen.width/20,Screen.height/20 + Screen.height/12 * i,120,30),towers[i].name + " (10$)")){
+				towerPlacement.setItem(towers[i]);
+			}	
+			
+			GUI.Box(new Rect(Screen.width/2,Screen.height/20,150,30), "money:"+" "+towerPlacement.money.ToString()+"$");
 
+			if(GUI.Button(new Rect(Screen.width/20*4,Screen.height/20 + Screen.height/12 * 0,100,30), "Next Wave")) {
+				spawn.nextWave();			}
+		}
+		
+	}
 }

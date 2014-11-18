@@ -108,6 +108,8 @@ MonoBehaviour:
   TheGameText: {fileID: 808833304}
   TimerText: {fileID: 155576530}
   CreditsText: {fileID: 1496089334}
+  towers:
+  - {fileID: 100004, guid: 9156ea571ab016a44b3f88b953d9e64e, type: 2}
 --- !u!4 &5357510
 Transform:
   m_ObjectHideFlags: 0
@@ -325,8 +327,6 @@ GameObject:
   - 92: {fileID: 259441416}
   - 124: {fileID: 259441415}
   - 81: {fileID: 259441414}
-  - 114: {fileID: 259441420}
-  - 114: {fileID: 259441419}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -399,31 +399,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
---- !u!114 &259441419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 259441413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8e7b14acea3357489f27c11c980884e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  towers:
-  - {fileID: 100004, guid: 9156ea571ab016a44b3f88b953d9e64e, type: 2}
---- !u!114 &259441420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 259441413}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df2366109febc7c41b6de4a14b605f41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  money: 100
 --- !u!1 &579924925
 GameObject:
   m_ObjectHideFlags: 0
@@ -22058,6 +22033,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1562445610}
+  - 114: {fileID: 1562445611}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -22078,6 +22054,18 @@ Transform:
   - {fileID: 5357510}
   m_Father: {fileID: 0}
   m_RootOrder: 5
+--- !u!114 &1562445611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1562445609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df2366109febc7c41b6de4a14b605f41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  money: 100
 --- !u!1 &1567764859
 GameObject:
   m_ObjectHideFlags: 0
