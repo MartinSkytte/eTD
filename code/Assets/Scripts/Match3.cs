@@ -30,6 +30,8 @@ public class Match3 : MonoBehaviour {
 	public float scale = 0;
 
 
+ 
+
 	private static GUIManager instance;
 
 	public float timeLeft;
@@ -43,7 +45,27 @@ public class Match3 : MonoBehaviour {
 		GenBoard();
 		paused = true;
 		GUIManager.SetCredits (credits);
+		Tutorial ();
 	}
+
+	void Tutorial(){
+		GameObject plane = GameObject.CreatePrimitive (PrimitiveType.Plane);
+
+		plane.transform.position = new Vector3 (35, 4, -1f);
+		plane.transform.rotation = Quaternion.AngleAxis(270, Vector3.right);
+		plane.transform.localScale = new Vector3 (3,0, 3);
+
+
+		//GameObject tutorial = new GameObject ("Tutorial");
+	//	Instantiate (tutorial);
+	//	GUIText tutorialText = tutorial.AddComponent<GUIText> ();
+	//	tutorialText.guiText.enabled = true;
+	//	tutorialText.transform.position = new Vector3 (30f, 2f, -1f);
+	//	tutorialText.guiText.color = Color.black;
+	//	tutorialText.guiText.fontSize = 20;
+	//	tutorialText.guiText.text = "This is the tutorial!!";
+	}
+
 
 	void GameWon(){
 		CreditManager();
