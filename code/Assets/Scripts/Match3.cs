@@ -49,11 +49,11 @@ public class Match3 : MonoBehaviour {
 	}
 
 	void Tutorial(){
-		GameObject plane = GameObject.CreatePrimitive (PrimitiveType.Plane);
+		//GameObject plane = GameObject.CreatePrimitive (PrimitiveType.Plane);
 
-		plane.transform.position = new Vector3 (35, 4, -1f);
-		plane.transform.rotation = Quaternion.AngleAxis(270, Vector3.right);
-		plane.transform.localScale = new Vector3 (3,0, 3);
+		//plane.transform.position = new Vector3 (35, 4, -1f);
+		//plane.transform.rotation = Quaternion.AngleAxis(270, Vector3.right);
+		//plane.transform.localScale = new Vector3 (3,0, 3);
 
 
 		//GameObject tutorial = new GameObject ("Tutorial");
@@ -117,7 +117,7 @@ public class Match3 : MonoBehaviour {
 
 	void Update(){
 
-		if (Input.GetMouseButtonDown(1)) {
+		if (Input.GetButton("Jump")) {
 			score = 0;
 			GUIManager.SetCurrentNumber(score);
 			GameEventManager.TriggerGameOver();	
