@@ -30,10 +30,6 @@ public class Match3 : MonoBehaviour {
 	public float scale = 0;
 
 
- 
-
-	private static GUIManager instance;
-
 	public float timeLeft;
 	
 	void Start(){
@@ -96,7 +92,7 @@ public class Match3 : MonoBehaviour {
 	}
 
 	void GameOver (){
-		paused = true;
+		//paused = true;
 		CreditManager();
 		timeLeft = 0;
 		renderer.enabled = true;
@@ -117,7 +113,7 @@ public class Match3 : MonoBehaviour {
 
 	void Update(){
 
-		if (Input.GetButton("Jump")) {
+		if (Input.GetMouseButtonDown(1)) {
 			score = 0;
 			GUIManager.SetCurrentNumber(score);
 			GameEventManager.TriggerGameOver();	

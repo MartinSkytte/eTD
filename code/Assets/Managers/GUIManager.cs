@@ -6,7 +6,7 @@ public class GUIManager : MonoBehaviour {
 	public GUIText CurrentNumberText, GoalNumberText, InstructionsText, TheGameText, TimerText, CreditsText, TutorialText;
 	
 	private static GUIManager instance;
-	private static bool firstRun;
+	private bool firstRun;
 	
 	public GameObject[] towers;
 	
@@ -21,8 +21,9 @@ public class GUIManager : MonoBehaviour {
 	void Start () {
 		towerPlacement = GameObject.Find ("Managers").GetComponent<TowerPlacement> ();
 		spawn = GameObject.Find("Spawn").GetComponent<spawner>();
-		instance = this;
-		
+	
+	 	instance = this;
+	
 		
 		CreditsText.enabled = false;
 		
@@ -89,7 +90,7 @@ public class GUIManager : MonoBehaviour {
 	private void GameStart(){
 		SetMidText("Start");
 		InstructionsText.enabled = false;
-		enabled = false;
+		//enabled = false;
 	}
 	
 	private void GameWon(){
