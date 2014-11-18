@@ -34,16 +34,14 @@ public class spawner : MonoBehaviour {
 		}
 	}
 
-	void OnGUI() {
-		if(GUI.Button(new Rect(Screen.width/20*4,Screen.height/20 + Screen.height/12 * 0,100,30), "Next Wave")) {
-			try {
-				currentWave++;
-				spawnTime = levelInfo [currentWave].spawnTime;
-				spawnTimeLeft = spawnTime;
-				amount = levelInfo [currentWave].amount;
-			} catch (UnityException ue) {
-				Debug.Log(ue.Message);
-			}
+	public void nextWave(){
+		try {
+			currentWave++;
+			spawnTime = levelInfo [currentWave].spawnTime;
+			spawnTimeLeft = spawnTime;
+			amount = levelInfo [currentWave].amount;
+		} catch (UnityException ue) {
+			Debug.Log(ue.Message);
 		}
 	}
 }
