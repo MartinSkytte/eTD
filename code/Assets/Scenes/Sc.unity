@@ -646,7 +646,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelsInfo:
-  - creep: {fileID: 100002, guid: 5759555a8c23f534c8032a4650987414, type: 2}
+  - creep: {fileID: 0}
     target: {fileID: 2010623267}
     amount: 45
     health: 1
@@ -1004,6 +1004,10 @@ Prefab:
       propertyPath: target
       value: 
       objectReference: {fileID: 2010623267}
+    - target: {fileID: 11400000, guid: 11fd72a6ffcca94468542942f873dace, type: 2}
+      propertyPath: levelsInfo.Array.data[0].creep
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 11fd72a6ffcca94468542942f873dace, type: 2}
   m_RootGameObject: {fileID: 707030261}
