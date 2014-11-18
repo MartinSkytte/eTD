@@ -11,6 +11,7 @@ public class GUIManager : MonoBehaviour {
 	
 	private TowerPlacement towerPlacement;
 	private spawner spawn;
+	private GUI
 
 	// Use this for initialization
 	void Start () {
@@ -52,6 +53,9 @@ public class GUIManager : MonoBehaviour {
 		}
 	}
 
+	public static void SetSpawnButtonText(string text) {
+		instance.spawn.guiText.text = text;
+	}
 
 	public static void SetCurrentNumber(int currentN){
 		instance.CurrentNumberText.text = currentN.ToString();

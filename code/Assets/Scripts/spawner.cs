@@ -11,7 +11,10 @@ public class spawner : MonoBehaviour {
 	private float spawnTime;
 	private float spawnTimeLeft;
 	private int amount = 0;
+	private float countDown = 10;
+
 	public static int unitsInWave = 0;
+	private static GUIManager instance;
 
 	// Use this for initialization
 	void Start () {
@@ -33,7 +36,17 @@ public class spawner : MonoBehaviour {
 		} else {
 			spawnTimeLeft -= Time.deltaTime;
 		}
-		Debug.Log ("amount: " + spawner.unitsInWave);
+
+		if (spawner.unitsInWave == 0) {
+
+			countDown -=  Time.deltaTime;
+			GUIManager.SetSpawnButtonText("Next wave (" + ((int)countDown).ToString() + ")");
+
+			if(countDown <= 0) {
+				countDown = 10.0f;
+				nextWave();
+			}
+		}
 	}
 
 	public void nextWave(){
