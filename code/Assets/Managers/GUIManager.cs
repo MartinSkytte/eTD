@@ -14,7 +14,7 @@ public class GUIManager : MonoBehaviour {
 	private GUI
 
 	// Use this for initialization
-	void Start () {
+	void Start() {
 		towerPlacement = GameObject.Find ("Managers").GetComponent<TowerPlacement> ();
 		spawn = GameObject.Find("Spawn").GetComponent<spawner>();
 		instance = this;
