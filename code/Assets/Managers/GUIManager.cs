@@ -12,6 +12,8 @@ public class GUIManager : MonoBehaviour {
 	
 	private TowerPlacement towerPlacement;
 	private spawner spawn;
+
+	private string nextWaveText;
 	
 	//TowerGUI variables
 	private BasicTower tower;
@@ -39,7 +41,11 @@ public class GUIManager : MonoBehaviour {
 			GameEventManager.TriggerGameStart ();
 		}
 	}
-	
+
+	public static void SetCurrentNumber(int currentN){
+		instance.CurrentNumberText.text = currentN.ToString();
+	}
+
 	public static void SetMidText(string tex){
 		instance.TheGameText.enabled = true;
 		switch (tex) {
@@ -57,12 +63,11 @@ public class GUIManager : MonoBehaviour {
 			break;
 		}
 	}
-	
-	
-	public static void SetCurrentNumber(int currentN){
-		instance.CurrentNumberText.text = currentN.ToString();
+
+	public static void SetSpawnButtonText(string text) {
+		instance.nextWaveText = text;
 	}
-	
+
 	public static void SetGoalNumber(int goalN){
 		instance.GoalNumberText.text = goalN.ToString();
 	}
@@ -108,7 +113,7 @@ public class GUIManager : MonoBehaviour {
 		
 		GUI.Box(new Rect(Screen.width/2,Screen.height/20,150,30), "money:"+" "+towerPlacement.money.ToString()+"$");
 		
-		if(GUI.Button(new Rect(Screen.width/20*4,Screen.height/20 + Screen.height/12 * 0,100,30), "Next Wave")) {
+		if(GUI.Button(new Rect(Screen.width/20*4,Screen.height/20 + Screen.height/12 * 0,100,30), nextWaveText)) {
 			spawn.nextWave();			
 		}
 		if(this.showTowerMenu){
