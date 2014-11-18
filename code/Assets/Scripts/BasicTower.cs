@@ -6,10 +6,13 @@ public class BasicTower : MonoBehaviour {
 	public GameObject projectile;
 	public float reloadTime = 1;
 	public Transform target;
+	public float upgradeCost = 10;
 
 	private float nextFireTime;
 
-
+	void OnMouseDown(){
+		GUIManager.showTowerGUI (this.gameObject);
+	}
 
 
 	void OnTriggerEnter(Collider c){
@@ -39,5 +42,8 @@ public class BasicTower : MonoBehaviour {
 		}
 	}
 
-
+	public void upgradetower(){
+		reloadTime = Mathf.Round(reloadTime / 1.5f);
+		upgradeCost = Mathf.Round(upgradeCost * 1.5f);
+	}
 }
