@@ -15,7 +15,7 @@ public class Match3 : MonoBehaviour {
 	public Transform[] blocks;
 	
 	//Check if swap effect ended
-	private bool swapEffect, paused;
+	private bool swapEffect, paused, newgame;
 	
 	private Color blockColor = Color.white;
 
@@ -42,6 +42,7 @@ public class Match3 : MonoBehaviour {
 		paused = true;
 		GUIManager.SetCredits (credits);
 		Tutorial ();
+		newgame = true;
 	}
 
 	void Tutorial(){
@@ -80,15 +81,9 @@ public class Match3 : MonoBehaviour {
 								credits += (int)Mathf.FloorToInt (100 * (2 - scale));
 								Debug.Log ("credits:" + credits);
 						}
-						/*if (score >= goal) {
-			credits += 100;
-		} else if ((score*1000 / goal) <= 1050) {
-			credits += 50;		
-		} else {
-			credits += 0;		
-		}*/
-						GUIManager.SetCredits (credits);
-				}
+			GUIManager.SetCredits (credits);
+			newgame = true;
+			}
 	}
 
 	void GameOver (){
@@ -100,15 +95,17 @@ public class Match3 : MonoBehaviour {
 	}
 	
 	private void GameStart (){
-		paused = false;
-		renderer.enabled = true;
-		enabled = true;
-		GUIManager.SetMidText("Nothing");
-		score = 0;
-		GUIManager.SetCurrentNumber(score);
-		goal = Random.Range(10,100);
-		GUIManager.SetGoalNumber(goal);
-
+		if (newgame == true) {
+						paused = false;
+						renderer.enabled = true;
+						enabled = true;
+						GUIManager.SetMidText ("Nothing");
+						score = 0;
+						GUIManager.SetCurrentNumber (score);
+						goal = Random.Range (10, 100);
+						GUIManager.SetGoalNumber (goal);
+						newgame = false;
+				}
 	}
 
 	void Update(){
