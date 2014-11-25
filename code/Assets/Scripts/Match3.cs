@@ -6,6 +6,7 @@ public class Match3 : MonoBehaviour {
 	//Swap speed
 	public float swapSpeed = 10.0f;
 	
+
 	//Board
 	public int[,] board;
 
@@ -28,6 +29,7 @@ public class Match3 : MonoBehaviour {
 	public string finalID;
 
 	public float scale = 0;
+	Canvas tutorialCanvas;
 
 
 	public float timeLeft;
@@ -41,30 +43,18 @@ public class Match3 : MonoBehaviour {
 		GenBoard();
 		paused = true;
 		GUIManager.SetCredits (credits);
-		Tutorial ();
 		newgame = true;
+
 	}
 
-	void Tutorial(){
-		//GameObject plane = GameObject.CreatePrimitive (PrimitiveType.Plane);
-
-		//plane.transform.position = new Vector3 (35, 4, -1f);
-		//plane.transform.rotation = Quaternion.AngleAxis(270, Vector3.right);
-		//plane.transform.localScale = new Vector3 (3,0, 3);
-
-
-		//GameObject tutorial = new GameObject ("Tutorial");
-	//	Instantiate (tutorial);
-	//	GUIText tutorialText = tutorial.AddComponent<GUIText> ();
-	//	tutorialText.guiText.enabled = true;
-	//	tutorialText.transform.position = new Vector3 (30f, 2f, -1f);
-	//	tutorialText.guiText.color = Color.black;
-	//	tutorialText.guiText.fontSize = 20;
-	//	tutorialText.guiText.text = "This is the tutorial!!";
+	void endTutorial(){
+		tutorialCanvas = GetComponent<Canvas> ();
+		tutorialCanvas.enabled = false;
 	}
 
 
 	void GameWon(){
+		endTutorial ();
 		CreditManager();
 		timeLeft = 0;
 		renderer.enabled = false;
@@ -115,13 +105,6 @@ public class Match3 : MonoBehaviour {
 			GUIManager.SetCurrentNumber(score);
 			GameEventManager.TriggerGameOver();	
 		}
-		//if ((score == goal || score > goal)&& !WinLose) {
-		//	GameEventManager.TriggerGameOver();
-		//}//else if(score > goal){
-			//GameEventManager.TriggerGameOver();
-	//	}
-		
-		//Select  block effect
 
 		//Select block effect
 		if(Block.select){
