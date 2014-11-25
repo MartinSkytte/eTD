@@ -6,6 +6,7 @@ public class spawner : MonoBehaviour {
 
 	public int currentWave;
 	public Transform target;
+	public bool wavesEnabled;
 	private LevelInfoList infoList;
 	private List<LevelInfoList.LevelInfo> levelInfo;
 	private float spawnTime;
@@ -20,6 +21,7 @@ public class spawner : MonoBehaviour {
 	void Start () {
 		infoList = (LevelInfoList)gameObject.GetComponent<LevelInfoList> ();
 		levelInfo = infoList.levelsInfo;
+		GUIManager.SetSpawnButtonText ("Next wave");
 	}
 	
 	// Update is called once per frame
@@ -35,18 +37,19 @@ public class spawner : MonoBehaviour {
 		} else {
 			spawnTimeLeft -= Time.deltaTime;
 		}
+		if (wavesEnabled) {
+			if (spawner.unitsInWave == 0) {
+				countDown -= Time.deltaTime;
+				GUIManager.SetSpawnButtonText ("Next wave (" + ((int)countDown).ToString () + ")");
 
-		if (spawner.unitsInWave == 0) {
-
-			countDown -=  Time.deltaTime;
-			GUIManager.SetSpawnButtonText("Next wave (" + ((int)countDown).ToString() + ")");
-
-			if(countDown <= 0) {
-				nextWave();
-				countDown = 10.0f;
+				if (countDown <= 0) {
+					nextWave ();
+					countDown = 10.0f;
+				}
 			}
 		}
 	}
+
 
 	public void nextWave(){
 		try {

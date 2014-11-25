@@ -609,6 +609,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentWave: -1
   target: {fileID: 2010623267}
+  wavesEnabled: 0
 --- !u!114 &707030263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22425,7 +22426,7 @@ MonoBehaviour:
   - {fileID: 400000, guid: 6dd84f3e0df567b409a402cc629cec55, type: 2}
   blocksDestroyed: 0
   score: 0
-  credits: 0
+  credits: 30
   finalID: 
   scale: 0
   timeLeft: 0

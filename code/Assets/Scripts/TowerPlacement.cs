@@ -8,6 +8,7 @@ public class TowerPlacement : MonoBehaviour {
 	private bool hasPlaced;
 	private Camera cam;
 	private Match3 mt;
+	private GameObject tempTower; // variable for making checks with price ect.
 
 	public int money;
 	// Use this for initialization
@@ -29,22 +30,21 @@ public class TowerPlacement : MonoBehaviour {
 
 		if (Input.GetMouseButtonDown(0)) {
 			if(isLegalPosition()){
-				if (money >= towerBase.price) {
-					if(hasPlaced == false){
-						mt.credits -= towerBase.price;
-					}
 					hasPlaced = true;
-				}
 			}
 		}
 	}
 
 	public void setItem(GameObject t){
-		hasPlaced = false;
-		currentTower = ((GameObject)Instantiate (t)).transform;
-		towerBase = currentTower.GetComponentInChildren<TowerBase> ();
-
+		tempTower = (GameObject)Instantiate (t);
+		if (tempTower.transform.GetComponentInChildren<TowerBase>().price <= mt.credits) {
+			hasPlaced = false;
+			currentTower = ((GameObject)Instantiate (t)).transform;
+			towerBase = currentTower.GetComponentInChildren<TowerBase> ();
+			mt.credits -= towerBase.price;
+		}
 	}
+
 
 	bool isLegalPosition(){
 		Debug.Log("wallcount "+towerBase.WallColliders.Count);

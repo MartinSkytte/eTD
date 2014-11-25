@@ -114,6 +114,7 @@ public class GUIManager : MonoBehaviour {
 		GUI.Box(new Rect(Screen.width/2,Screen.height/20,150,30), "money:"+" "+towerPlacement.money.ToString()+"$");
 		
 		if(GUI.Button(new Rect(Screen.width/20*4,Screen.height/20 + Screen.height/12 * 0,100,30), nextWaveText)) {
+			spawn.wavesEnabled = true;
 			spawn.nextWave();			
 		}
 		if(this.showTowerMenu){
