@@ -82,7 +82,7 @@ public class GUIManager : MonoBehaviour {
 	
 	public static void showTowerGUI(GameObject selected){
 		instance.showTowerMenu = true;
-		instance.tower = selected.GetComponent<BasicTower>();
+		instance.tower = selected.GetComponentInParent<BasicTower>();
 	}
 	
 	private void GameOver(){
