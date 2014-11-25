@@ -7,7 +7,7 @@ public class TowerPlacement : MonoBehaviour {
 	private Transform currentTower;
 	private bool hasPlaced;
 	private Camera cam;
-	private Match3 mt;
+	public Match3 mt;
 	private GameObject tempTower; // variable for making checks with price ect.
 
 	public int money;
@@ -44,6 +44,7 @@ public class TowerPlacement : MonoBehaviour {
 			towerBase = currentTower.GetComponentInChildren<TowerBase> ();
 			mt.credits -= towerBase.price;
 		}
+		Destroy (tempTower);
 	}
 
 

@@ -82,7 +82,7 @@ public class GUIManager : MonoBehaviour {
 	
 	public static void showTowerGUI(GameObject selected){
 		instance.showTowerMenu = true;
-		instance.tower = selected.GetComponentInParent<BasicTower>();
+		instance.tower = selected.GetComponent<BasicTower>();
 	}
 	
 	private void GameOver(){
@@ -117,10 +117,13 @@ public class GUIManager : MonoBehaviour {
 			spawn.wavesEnabled = true;
 			spawn.nextWave();			
 		}
-		if(this.showTowerMenu){
-			GUI.Box(new Rect(Screen.width/20*8,Screen.height-10,100,30), tower.name);
-			if(GUI.Button(new Rect(Screen.width/20*4,Screen.height/20 + Screen.height-10,100,30), "Upgrade:"+tower.upgradeCost+"$")) {
-				tower.upgradetower();			
+		if(instance.showTowerMenu){
+			GUI.Box(new Rect(Screen.width/20,Screen.height/20 + Screen.height/12*10,100,30), tower.name);
+			if(GUI.Button(new Rect(Screen.width/20*4,Screen.height/20 + Screen.height/12*10,100,30), "Upgrade:"+tower.upgradeCost+"$")) {
+				if(tower.upgradeCost <= towerPlacement.money){
+					towerPlacement.mt.credits -= tower.upgradeCost;
+					tower.upgradetower();			
+				}
 			}
 			
 		}
