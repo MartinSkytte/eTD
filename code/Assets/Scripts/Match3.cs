@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Match3 : MonoBehaviour {
@@ -29,7 +29,7 @@ public class Match3 : MonoBehaviour {
 	public string finalID;
 
 	public float scale = 0;
-	Canvas tutorialCanvas;
+	
 
 
 	public float timeLeft;
@@ -38,7 +38,6 @@ public class Match3 : MonoBehaviour {
 		GameEventManager.GameWon += GameWon;
 		GameEventManager.GameOver += GameOver;
 		GameEventManager.GameStart += GameStart;
-		GUIManager.SetMidText("Start");
 		board = new int[10,10];
 		GenBoard();
 		paused = true;
@@ -47,14 +46,11 @@ public class Match3 : MonoBehaviour {
 
 	}
 
-	void endTutorial(){
-		tutorialCanvas = GetComponent<Canvas> ();
-		tutorialCanvas.enabled = false;
-	}
+
 
 
 	void GameWon(){
-		endTutorial ();
+		GUIManager.endTutorial ();
 		CreditManager();
 		timeLeft = 0;
 		renderer.enabled = false;
@@ -77,6 +73,7 @@ public class Match3 : MonoBehaviour {
 	}
 
 	void GameOver (){
+		GUIManager.endTutorial ();
 		//paused = true;
 		CreditManager();
 		timeLeft = 0;
@@ -89,7 +86,6 @@ public class Match3 : MonoBehaviour {
 						paused = false;
 						renderer.enabled = true;
 						enabled = true;
-						GUIManager.SetMidText ("Nothing");
 						score = 0;
 						GUIManager.SetCurrentNumber (score);
 						goal = Random.Range (10, 100);
@@ -138,7 +134,6 @@ public class Match3 : MonoBehaviour {
 			timeLeft += Time.deltaTime;
 			if (timeLeft < 0)timeLeft = 0;
 			int timeInSeconds = (int)timeLeft;
-			GUIManager.SetCurrentTime(timeInSeconds);
 		}
 	}
 	
