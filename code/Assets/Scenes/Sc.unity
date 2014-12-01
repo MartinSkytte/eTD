@@ -106,7 +106,8 @@ MonoBehaviour:
   GoalNumberText: {fileID: 1540424468}
   CreditsText: {fileID: 1496089334}
   towers:
-  - {fileID: 100004, guid: 9156ea571ab016a44b3f88b953d9e64e, type: 2}
+  - {fileID: 100006, guid: 4e568041a77455e4caea054e2e9b9d91, type: 2}
+  - {fileID: 100006, guid: bad3e02e9a433884b8d3a33bdd73d7c7, type: 2}
 --- !u!4 &5357510
 Transform:
   m_ObjectHideFlags: 0
