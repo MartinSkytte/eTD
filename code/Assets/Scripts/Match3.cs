@@ -40,14 +40,20 @@ public class Match3 : MonoBehaviour {
 		GameEventManager.GameStart += GameStart;
 		board = new int[10,10];
 		GenBoard();
-		paused = true;
-		GUIManager.SetCredits (credits);
-		newgame = true;
 
+		paused = true;
+
+		newgame = true;
+		GameStart ();
+		//goal = -1;
+		Debug.Log ("goal:"+  goal);
 	}
 
 
-
+	int getGoal()
+	{
+		return goal;
+	}
 
 	void GameWon(){
 		GUIManager.endTutorial ();
