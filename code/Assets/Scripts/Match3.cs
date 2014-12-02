@@ -30,6 +30,9 @@ public class Match3 : MonoBehaviour {
 	public float scale = 0;
 	
 	public float timeLeft;
+
+	private bool firstTime;
+
 	void Start(){
 
 		GameEventManager.GameOver += GameOver;
@@ -39,6 +42,8 @@ public class Match3 : MonoBehaviour {
 		GenBoard();
 
 		paused = true;
+
+		firstTime = true;
 
 		newgame = true;
 		GameStart ();
@@ -64,7 +69,10 @@ public class Match3 : MonoBehaviour {
 	}
 
 	void GameOver (){
-		GUIManager.endMatchTutorial ();
+		if (firstTime) {
+			GUIManager.endMatchTutorial ();
+			firstTime = false;
+		}
 		CreditManager();
 		timeLeft = 0;
 		renderer.enabled = true;
