@@ -4,7 +4,7 @@ using System.Collections;
 public static class GameEventManager {
 	public delegate void GameEvent();
 
-	public static event GameEvent GameStart, GameOver, GameWon;
+	public static event GameEvent GameStart, GameOver;
 
 	public static void TriggerGameStart(){
 		if (GameStart != null) {
@@ -16,9 +16,5 @@ public static class GameEventManager {
 			GameOver();
 		}
 	}
-	public static void TriggerGameWon(){
-		if (GameWon != null) {
-			GameWon();
-		}
-	}
+
 }

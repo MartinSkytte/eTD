@@ -14,7 +14,13 @@ public class GUIManager : MonoBehaviour {
 	private spawner spawn;
 
 	private string nextWaveText;
-	
+
+	public static GameObject TDTutorial;
+	public static GameObject MatchTutorial;
+
+	//public static GameObject TDTutorial = GameObject.FindGameObjectWithTag("TDTutorial");
+	//public static GameObject MatchTutorial = GameObject.FindGameObjectWithTag("MatchTutorial");
+
 	//TowerGUI variables
 	private BasicTower tower;
 	private bool showTowerMenu;
@@ -22,17 +28,19 @@ public class GUIManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		TDTutorial = GameObject.FindGameObjectWithTag("TDTutorial");
+		GUIManager.MatchTutorial = GameObject.FindGameObjectWithTag("MatchTutorial");
+		GUIManager.TDTutorial.SetActive(false);
+
 		towerPlacement = GameObject.Find ("Managers").GetComponent<TowerPlacement> ();
 		spawn = GameObject.Find("Spawn").GetComponent<spawner>();
-		//this.SetCurrentNumber (0);
 	 	instance = this;
 		sWidth = Screen.width/100;
 		sHeight = Screen.height/100;
 
 		CreditsText.enabled = false;
-		GameObject.FindGameObjectWithTag("TDTutorial").SetActive(false);
-		
-		GameEventManager.GameWon += GameWon;
+
+
 		GameEventManager.GameOver += GameOver;
 		GameEventManager.GameStart += GameStart;
 
@@ -45,18 +53,21 @@ public class GUIManager : MonoBehaviour {
 		}
 	}
 
-	public static void endMatchTutorial(){
-		GameObject.FindGameObjectWithTag("MatchTutorial").SetActive(false);
-		//GameObject.FindGameObjectWithTag("TDTutorial").SetActive(true);
+	public void startMatch3(){
+		/*GameObject match3object = */GameObject.FindGameObjectWithTag("Match3Object").SetActive (true);
 	}
-	//public static void endTDTutorial(){
-	//	GameObject.FindGameObjectWithTag ("TDTutorial").SetActive (false);
+
+	public static void endMatchTutorial(){
+		GUIManager.TDTutorial.SetActive(true);
+		GUIManager.MatchTutorial.SetActive(false);
+	}
+	public static void endTDTutorial(){
+		GUIManager.TDTutorial.SetActive(false);
 	
-	//}
+	}
 
 
 	public static void SetCurrentNumber(int currentN){
-		Debug.Log ("supposed to be writing");
 		instance.CurrentNumberText.text = "Score: " + currentN.ToString();
 	}
 	
