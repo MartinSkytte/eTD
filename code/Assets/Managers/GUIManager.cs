@@ -4,7 +4,11 @@ using System.Collections;
 public class GUIManager : MonoBehaviour {
 	
 	public GUIText CurrentNumberText, GoalNumberText, CreditsText;
-	
+
+	public Canvas matchTutorial, towerTutorial;
+
+	public GUIStyle buttonStyle, textStyle;
+
 	private static GUIManager instance;
 	private bool firstRun;
 	
@@ -18,6 +22,7 @@ public class GUIManager : MonoBehaviour {
 	//TowerGUI variables
 	private BasicTower tower;
 	private bool showTowerMenu;
+	private static bool mTutorial;
 	public static float sWidth, sHeight;
 
 	// Use this for initialization
@@ -30,12 +35,13 @@ public class GUIManager : MonoBehaviour {
 		sHeight = Screen.height/100;
 
 		CreditsText.enabled = false;
+
 		GameObject.FindGameObjectWithTag("TDTutorial").SetActive(false);
-		
+		mTutorial = true;
 		GameEventManager.GameWon += GameWon;
 		GameEventManager.GameOver += GameOver;
 		GameEventManager.GameStart += GameStart;
-
+		buttonStyle = new GUIStyle(GUI.skin.button);
 	}
 	
 	// Update is called once per frame
@@ -46,6 +52,7 @@ public class GUIManager : MonoBehaviour {
 	}
 
 	public static void endMatchTutorial(){
+		mTutorial = false;
 		GameObject.FindGameObjectWithTag("MatchTutorial").SetActive(false);
 		//GameObject.FindGameObjectWithTag("TDTutorial").SetActive(true);
 	}
@@ -87,36 +94,38 @@ public class GUIManager : MonoBehaviour {
 	}
 	
 	private void GameWon(){
-
 		enabled = true;
 	}
-	
+
+	void popup(int windowID){
+
+		print ("clicked");
+	}
+
 	void OnGUI() {
 
-		
-		GUI.Box(new Rect(Screen.width/2,Screen.height/20,150,30), "money: "+towerPlacement.money.ToString()+"$");
-
-
-		if (instance.GetComponentInChildren<Canvas> ().enabled == false)
+		GUI.Box(new Rect(sWidth*50,sHeight*5,150,30), "Money: "+towerPlacement.money.ToString()+"$", textStyle);
+	
+		if (!mTutorial)
 		{
-			for (int i = 0; i < towers.Length; i++) {
-				if (GUI.Button (new Rect (Screen.width / 20, Screen.height / 20 + Screen.height / 12 * i, 120, 30), towers [i].name + " (10$)")) {
-					towerPlacement.setItem (towers [i]);
-				}	
-			}
-
 			if(GUI.Button(new Rect(Screen.width/20*4,Screen.height/20 + Screen.height/12 * 0,100,30), nextWaveText)) {
 				spawn.wavesEnabled = true;
 				spawn.nextWave();			
 			}
 			if(instance.showTowerMenu){
-				GUI.Box(new Rect(Screen.width/20,Screen.height/20 + Screen.height/12*10,100,30), tower.name);
+
+				GUI.Box(new Rect(Screen.width/20,Screen.height/20 + Screen.height/12*10,100,30), tower.name,textStyle);
 				if(GUI.Button(new Rect(Screen.width/20*4,Screen.height/20 + Screen.height/12*10,100,30), "Upgrade:"+tower.upgradeCost+"$")) {
 					if(tower.upgradeCost <= towerPlacement.money){
 						towerPlacement.mt.credits -= tower.upgradeCost;
 						tower.upgradetower();			
 					}
 				}
+			}
+			for (int i = 0; i < towers.Length; i++) {
+				if (GUI.Button (new Rect (Screen.width / 20, Screen.height / 20 + Screen.height / 12 * i, 120, 30), towers [i].name + " (10$)",buttonStyle)) {
+					towerPlacement.setItem (towers [i]);
+				}	
 			}
 			
 		}
