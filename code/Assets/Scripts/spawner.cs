@@ -26,6 +26,10 @@ public class spawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if ((levelInfo.Count-1) < currentWave)
+			return;
+
+
 		if (spawnTimeLeft <= 0 && amount != 0) {
 			GameObject creep = (GameObject)Instantiate(levelInfo[currentWave].creep, transform.position, transform.rotation);
 			creep.GetComponent<AIPather>().target = target;
@@ -38,10 +42,9 @@ public class spawner : MonoBehaviour {
 			spawnTimeLeft -= Time.deltaTime;
 		}
 		if (wavesEnabled) {
-			if (spawner.unitsInWave == 0) {
+			if (spawner.unitsInWave <= 0) {
 				countDown -= Time.deltaTime;
 				GUIManager.SetSpawnButtonText ("Next wave (" + ((int)countDown).ToString () + ")");
-
 				if (countDown <= 0) {
 					nextWave ();
 					countDown = 10.0f;
@@ -54,10 +57,14 @@ public class spawner : MonoBehaviour {
 	public void nextWave(){
 		try {
 			currentWave++;
+			if ((levelInfo.Count-1) < currentWave) {
+				Debug.Log("GAME OVER");
+				return;
+			}
 			spawnTime = levelInfo [currentWave].spawnTime;
 			spawnTimeLeft = spawnTime;
 			amount = levelInfo [currentWave].amount;
-			spawner.unitsInWave = amount;
+			spawner.unitsInWave = amount;	
 		} catch (UnityException ue) {
 			Debug.Log(ue.Message);
 		}
