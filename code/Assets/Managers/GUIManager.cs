@@ -4,7 +4,9 @@ using System.Collections;
 public class GUIManager : MonoBehaviour {
 	
 	public GUIText CurrentNumberText, GoalNumberText, CreditsText;
-	
+
+	public Canvas matchTutorial, towerTutorial;
+
 	private static GUIManager instance;
 	private bool firstRun;
 	
@@ -18,6 +20,7 @@ public class GUIManager : MonoBehaviour {
 	//TowerGUI variables
 	private BasicTower tower;
 	private bool showTowerMenu;
+	private static bool mTutorial;
 	public static float sWidth, sHeight;
 
 	// Use this for initialization
@@ -30,8 +33,9 @@ public class GUIManager : MonoBehaviour {
 		sHeight = Screen.height/100;
 
 		CreditsText.enabled = false;
+
 		GameObject.FindGameObjectWithTag("TDTutorial").SetActive(false);
-		
+		mTutorial = true;
 		GameEventManager.GameWon += GameWon;
 		GameEventManager.GameOver += GameOver;
 		GameEventManager.GameStart += GameStart;
@@ -46,6 +50,7 @@ public class GUIManager : MonoBehaviour {
 	}
 
 	public static void endMatchTutorial(){
+		mTutorial = false;
 		GameObject.FindGameObjectWithTag("MatchTutorial").SetActive(false);
 		//GameObject.FindGameObjectWithTag("TDTutorial").SetActive(true);
 	}
@@ -97,13 +102,9 @@ public class GUIManager : MonoBehaviour {
 		GUI.Box(new Rect(Screen.width/2,Screen.height/20,150,30), "money: "+towerPlacement.money.ToString()+"$");
 
 
-		if (instance.GetComponentInChildren<Canvas> ().enabled == false)
+		if (!mTutorial)
 		{
-			for (int i = 0; i < towers.Length; i++) {
-				if (GUI.Button (new Rect (Screen.width / 20, Screen.height / 20 + Screen.height / 12 * i, 120, 30), towers [i].name + " (10$)")) {
-					towerPlacement.setItem (towers [i]);
-				}	
-			}
+
 
 			if(GUI.Button(new Rect(Screen.width/20*4,Screen.height/20 + Screen.height/12 * 0,100,30), nextWaveText)) {
 				spawn.wavesEnabled = true;
@@ -117,6 +118,11 @@ public class GUIManager : MonoBehaviour {
 						tower.upgradetower();			
 					}
 				}
+			}
+			for (int i = 0; i < towers.Length; i++) {
+				if (GUI.Button (new Rect (Screen.width / 20, Screen.height / 20 + Screen.height / 12 * i, 120, 30), towers [i].name + " (10$)")) {
+					towerPlacement.setItem (towers [i]);
+				}	
 			}
 			
 		}
