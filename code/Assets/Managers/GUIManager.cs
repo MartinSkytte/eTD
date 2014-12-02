@@ -25,6 +25,7 @@ public class GUIManager : MonoBehaviour {
 	private BasicTower tower;
 	private bool showTowerMenu;
 	public static float sWidth, sHeight;
+	static bool endTutorial;
 
 	// Use this for initialization
 	void Start () {
@@ -39,6 +40,7 @@ public class GUIManager : MonoBehaviour {
 		sHeight = Screen.height/100;
 
 		CreditsText.enabled = false;
+		endTutorial = true;
 
 
 		GameEventManager.GameOver += GameOver;
@@ -53,13 +55,14 @@ public class GUIManager : MonoBehaviour {
 		}
 	}
 
-	public void startMatch3(){
-		/*GameObject match3object = */GameObject.FindGameObjectWithTag("Match3Object").SetActive (true);
-	}
+	//public void startMatch3(){
+	//	/*GameObject match3object = */GameObject.FindGameObjectWithTag("Match3Object").SetActive (true);
+	//}
 
 	public static void endMatchTutorial(){
 		GUIManager.TDTutorial.SetActive(true);
 		GUIManager.MatchTutorial.SetActive(false);
+		endTutorial = false;
 	}
 	public static void endTDTutorial(){
 		GUIManager.TDTutorial.SetActive(false);
@@ -108,7 +111,7 @@ public class GUIManager : MonoBehaviour {
 		GUI.Box(new Rect(Screen.width/2,Screen.height/20,150,30), "money: "+towerPlacement.money.ToString()+"$");
 
 
-		if (instance.GetComponentInChildren<Canvas> ().enabled == false)
+		if (!endTutorial)
 		{
 			for (int i = 0; i < towers.Length; i++) {
 				if (GUI.Button (new Rect (Screen.width / 20, Screen.height / 20 + Screen.height / 12 * i, 120, 30), towers [i].name + " (10$)")) {
