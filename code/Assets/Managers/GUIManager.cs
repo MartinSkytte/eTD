@@ -30,6 +30,7 @@ public class GUIManager : MonoBehaviour {
 		sHeight = Screen.height/100;
 
 		CreditsText.enabled = false;
+		GameObject.FindGameObjectWithTag("TDTutorial").SetActive(false);
 		
 		GameEventManager.GameWon += GameWon;
 		GameEventManager.GameOver += GameOver;
@@ -44,11 +45,15 @@ public class GUIManager : MonoBehaviour {
 		}
 	}
 
-	public static void endTutorial(){
+	public static void endMatchTutorial(){
+		GameObject.FindGameObjectWithTag("MatchTutorial").SetActive(false);
+		//GameObject.FindGameObjectWithTag("TDTutorial").SetActive(true);
+	}
+	//public static void endTDTutorial(){
+	//	GameObject.FindGameObjectWithTag ("TDTutorial").SetActive (false);
+	
+	//}
 
-		instance.GetComponentInChildren<Canvas> ().enabled = false;
-		Debug.Log ("end tutorial");
-		}
 
 	public static void SetCurrentNumber(int currentN){
 		Debug.Log ("supposed to be writing");

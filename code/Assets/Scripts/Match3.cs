@@ -5,7 +5,6 @@ public class Match3 : MonoBehaviour {
 	
 	//Swap speed
 	public float swapSpeed = 10.0f;
-	
 
 	//Board
 	public int[,] board;
@@ -45,7 +44,6 @@ public class Match3 : MonoBehaviour {
 
 		newgame = true;
 		GameStart ();
-		//goal = -1;
 		Debug.Log ("goal:"+  goal);
 	}
 
@@ -56,7 +54,8 @@ public class Match3 : MonoBehaviour {
 	}
 
 	void GameWon(){
-		GUIManager.endTutorial ();
+		Debug.Log("Game Won called");
+		GUIManager.endMatchTutorial ();
 		CreditManager();
 		timeLeft = 0;
 		renderer.enabled = false;
@@ -70,7 +69,7 @@ public class Match3 : MonoBehaviour {
 						if (scale > 2 || scale <= 0) {
 								credits += 0;		
 						} else {
-								credits += (int)Mathf.FloorToInt (100 * (2 - scale));
+								credits += (int)Mathf.FloorToInt (100 * (2 - 2*scale));
 								Debug.Log ("credits:" + credits);
 						}
 			GUIManager.SetCredits (credits);
@@ -79,8 +78,8 @@ public class Match3 : MonoBehaviour {
 	}
 
 	void GameOver (){
-		GUIManager.endTutorial ();
-		//paused = true;
+		Debug.Log("Game Over called");
+		GUIManager.endMatchTutorial ();
 		CreditManager();
 		timeLeft = 0;
 		renderer.enabled = true;
