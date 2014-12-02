@@ -7,6 +7,8 @@ public class GUIManager : MonoBehaviour {
 
 	public Canvas matchTutorial, towerTutorial;
 
+	public GUIStyle buttonStyle, textStyle;
+
 	private static GUIManager instance;
 	private bool firstRun;
 	
@@ -39,7 +41,7 @@ public class GUIManager : MonoBehaviour {
 		GameEventManager.GameWon += GameWon;
 		GameEventManager.GameOver += GameOver;
 		GameEventManager.GameStart += GameStart;
-
+		buttonStyle = new GUIStyle(GUI.skin.button);
 	}
 	
 	// Update is called once per frame
@@ -92,26 +94,27 @@ public class GUIManager : MonoBehaviour {
 	}
 	
 	private void GameWon(){
-
 		enabled = true;
 	}
-	
+
+	void popup(int windowID){
+
+		print ("clicked");
+	}
+
 	void OnGUI() {
 
-		
-		GUI.Box(new Rect(Screen.width/2,Screen.height/20,150,30), "money: "+towerPlacement.money.ToString()+"$");
-
-
+		GUI.Box(new Rect(sWidth*50,sHeight*5,150,30), "Money: "+towerPlacement.money.ToString()+"$", textStyle);
+	
 		if (!mTutorial)
 		{
-
-
 			if(GUI.Button(new Rect(Screen.width/20*4,Screen.height/20 + Screen.height/12 * 0,100,30), nextWaveText)) {
 				spawn.wavesEnabled = true;
 				spawn.nextWave();			
 			}
 			if(instance.showTowerMenu){
-				GUI.Box(new Rect(Screen.width/20,Screen.height/20 + Screen.height/12*10,100,30), tower.name);
+
+				GUI.Box(new Rect(Screen.width/20,Screen.height/20 + Screen.height/12*10,100,30), tower.name,textStyle);
 				if(GUI.Button(new Rect(Screen.width/20*4,Screen.height/20 + Screen.height/12*10,100,30), "Upgrade:"+tower.upgradeCost+"$")) {
 					if(tower.upgradeCost <= towerPlacement.money){
 						towerPlacement.mt.credits -= tower.upgradeCost;
@@ -120,7 +123,7 @@ public class GUIManager : MonoBehaviour {
 				}
 			}
 			for (int i = 0; i < towers.Length; i++) {
-				if (GUI.Button (new Rect (Screen.width / 20, Screen.height / 20 + Screen.height / 12 * i, 120, 30), towers [i].name + " (10$)")) {
+				if (GUI.Button (new Rect (Screen.width / 20, Screen.height / 20 + Screen.height / 12 * i, 120, 30), towers [i].name + " (10$)",buttonStyle)) {
 					towerPlacement.setItem (towers [i]);
 				}	
 			}
