@@ -123,7 +123,7 @@ public class GUIManager : MonoBehaviour {
 				}
 			}
 			for (int i = 0; i < towers.Length; i++) {
-				if (GUI.Button (new Rect (Screen.width / 20, Screen.height / 20 + Screen.height / 12 * i, 120, 30), towers [i].name + " (10$)",buttonStyle)) {
+				if (GUI.Button (new Rect (Screen.width / 20, Screen.height / 20 + Screen.height / 12 * i, 120, 30), towers [i].name + " (10$)")) {
 					towerPlacement.setItem (towers [i]);
 				}	
 			}
