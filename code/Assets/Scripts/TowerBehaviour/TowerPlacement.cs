@@ -28,9 +28,11 @@ public class TowerPlacement : MonoBehaviour {
 		
 		}
 
-		if (Input.GetMouseButtonDown(0)) {
-			if(isLegalPosition()){
-					hasPlaced = true;
+		if (Input.GetMouseButtonDown (0)) {
+			if (towerBase) {
+				if (isLegalPosition ()) {
+						hasPlaced = true;
+				}
 			}
 		}
 	}
