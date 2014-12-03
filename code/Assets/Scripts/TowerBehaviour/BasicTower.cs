@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using LibPDBinding;
 
 public class BasicTower : MonoBehaviour {
 
@@ -35,9 +36,11 @@ public class BasicTower : MonoBehaviour {
 	void Update () {
 		if (target){
 				if (Time.time >= nextFireTime) {
-						nextFireTime = Time.time + reloadTime;
-						this.transform.LookAt(target.localPosition);
-						Instantiate (projectile, transform.position, transform.rotation);
+					nextFireTime = Time.time + reloadTime;
+					this.transform.LookAt(target.localPosition);
+					Instantiate (projectile, transform.position, transform.rotation);
+					LibPD.SendMessage("TowerPos", "float", 0.5);
+					LibPD.SendMessage("TowerBang","bang");
 				}	
 		}
 	}

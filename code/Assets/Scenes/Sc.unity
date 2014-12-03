@@ -528,6 +528,7 @@ GameObject:
   - 92: {fileID: 259441416}
   - 124: {fileID: 259441415}
   - 81: {fileID: 259441414}
+  - 114: {fileID: 259441419}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -600,6 +601,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!114 &259441419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 259441413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49a1f5554a6e6c5428b3c3d16458ec3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nameOfPatch: SFX.pd
 --- !u!1 &282112644
 GameObject:
   m_ObjectHideFlags: 0
