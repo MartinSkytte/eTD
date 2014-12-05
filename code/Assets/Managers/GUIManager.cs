@@ -42,6 +42,9 @@ public class GUIManager : MonoBehaviour {
 		GameEventManager.GameOver += GameOver;
 		GameEventManager.GameStart += GameStart;
 		buttonStyle = new GUIStyle(GUI.skin.button);
+
+		textStyle = new GUIStyle ();
+		textStyle.fontSize = 20;
 	}
 	
 	// Update is called once per frame
@@ -108,25 +111,28 @@ public class GUIManager : MonoBehaviour {
 	
 		if (!mTutorial)
 		{
-			if(GUI.Button(new Rect(Screen.width/20*4,Screen.height/20 + Screen.height/12 * 0,100,30), nextWaveText)) {
+			if(GUI.Button(new Rect(sWidth*45,sHeight*18,100,30), nextWaveText)) {
 				spawn.wavesEnabled = true;
 				spawn.nextWave();			
 			}
+
+			for (int i = 0; i < towers.Length; i++) {
+				if (GUI.Button (new Rect (sWidth*45,sHeight * 33 + sHeight*i*13, 120, 30), towers [i].name + " (10$)")) {
+					towerPlacement.setItem (towers [i]);
+				}	
+			}
+
 			if(instance.showTowerMenu){
 
-				GUI.Box(new Rect(Screen.width/20,Screen.height/20 + Screen.height/12*10,100,30), tower.name,textStyle);
-				if(GUI.Button(new Rect(Screen.width/20*4,Screen.height/20 + Screen.height/12*10,100,30), "Upgrade:"+tower.upgradeCost+"$")) {
+				GUI.Box(new Rect(sWidth*45,sHeight*80 ,100,30), tower.name,textStyle);
+				if(GUI.Button(new Rect(sWidth*45,sHeight*90,100,30), "Upgrade:"+tower.upgradeCost+"$")) {
 					if(tower.upgradeCost <= towerPlacement.money){
 						towerPlacement.mt.credits -= tower.upgradeCost;
 						tower.upgradetower();			
 					}
 				}
 			}
-			for (int i = 0; i < towers.Length; i++) {
-				if (GUI.Button (new Rect (Screen.width / 20, Screen.height / 20 + Screen.height / 12 * i, 120, 30), towers [i].name + " (10$)")) {
-					towerPlacement.setItem (towers [i]);
-				}	
-			}
+
 			
 		}
 	}
