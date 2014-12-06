@@ -61,9 +61,7 @@ public class Match3 : MonoBehaviour {
 								credits += 0;		
 						} else {
 								credits += (int)Mathf.FloorToInt (50 * (2 - scale));
-				Debug.Log("credits" + credits);
 						}
-			GUIManager.SetCredits (credits);
 			newgame = true;
 			}
 	}

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GUIManager : MonoBehaviour {
 	
-	public GUIText CurrentNumberText, GoalNumberText, CreditsText;
+	public GUIText CurrentNumberText, GoalNumberText;
 	
 	private static GUIManager instance;
 	private bool firstRun;
@@ -38,8 +38,7 @@ public class GUIManager : MonoBehaviour {
 	 	instance = this;
 		sWidth = Screen.width/100;
 		sHeight = Screen.height/100;
-
-		CreditsText.enabled = false;
+		
 		endTutorial = true;
 
 
@@ -82,9 +81,9 @@ public class GUIManager : MonoBehaviour {
 		instance.GoalNumberText.text = "Goal: " + goalN.ToString();
 	}
 	
-	public static void SetCredits(int credits){
+	//public static void SetCredits(int credits){
 		//instance.CreditsText.text = credits.ToString ()+ "$";
-	}
+	//}
 	
 	public static void showTowerGUI(GameObject selected){
 		instance.showTowerMenu = true;
