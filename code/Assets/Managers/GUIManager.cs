@@ -4,7 +4,9 @@ using System.Collections;
 public class GUIManager : MonoBehaviour {
 	
 	public GUIText CurrentNumberText, GoalNumberText;
-	
+
+	public GUIStyle textStyle;
+
 	private static GUIManager instance;
 	private bool firstRun;
 	
@@ -44,6 +46,10 @@ public class GUIManager : MonoBehaviour {
 
 		GameEventManager.GameOver += GameOver;
 		GameEventManager.GameStart += GameStart;
+
+
+		//textStyle = new GUIStyle ();
+		textStyle.fontSize = 16;
 
 	}
 	
@@ -107,34 +113,43 @@ public class GUIManager : MonoBehaviour {
 	void OnGUI() {
 
 		
-		GUI.Box(new Rect(Screen.width/2,Screen.height/20,150,30), "money: "+towerPlacement.money.ToString()+"$");
+		GUI.Box(new Rect(sWidth * 70,sHeight * 20.3f,150,30), "Money: "+towerPlacement.money.ToString()+"$",textStyle);
 
 
 		if (!endTutorial)
 		{
+
+
+			spawn.wavesEnabled = true;
+			spawn.nextWave();			
+
+
 			for (int i = 0; i < towers.Length; i++) {
-				if (GUI.Button (new Rect (Screen.width / 20, Screen.height / 20 + Screen.height / 12 * i, 120, 30), towers [i].name + " (10$)")) {
+				if (GUI.Button (new Rect (sWidth*50,sHeight * 33 + sHeight*i*13, 100, 30), towers [i].name + " (10$)")) {
 					towerPlacement.setItem (towers [i]);
 				}	
 			}
 
-			if(GUI.Button(new Rect(Screen.width/20*4,Screen.height/20 + Screen.height/12 * 0,100,30), nextWaveText)) {
+			if(GUI.Button(new Rect(sWidth*50,sHeight * 10,100,30), nextWaveText)) {
 				spawn.wavesEnabled = true;
 				spawn.nextWave();			
 			}
+
 			if(instance.showTowerMenu){
-				GUI.Box(new Rect(Screen.width/20,Screen.height/20 + Screen.height/12*10,100,30), tower.name);
-				if(GUI.Button(new Rect(Screen.width/20*4,Screen.height/20 + Screen.height/12*10,100,30), "Upgrade:"+tower.upgradeCost+"$")) {
+				//GUI.Box(new Rect(Screen.width/20,Screen.height/20 + Screen.height/12*10,100,30), tower.name,textStyle);
+				GUI.Box(new Rect(sWidth*50,sHeight*80 ,100,30), tower.name,textStyle);
+				if(GUI.Button(new Rect(sWidth*50,sHeight*90,100,30), "Upgrade:"+tower.upgradeCost+"$")) {
 					if(tower.upgradeCost <= towerPlacement.money){
 						towerPlacement.mt.credits -= tower.upgradeCost;
 						tower.upgradetower();			
 					}
 				}
 			}
+
 			
 		}
 	}
-	
-}
+}	
+
 
 
