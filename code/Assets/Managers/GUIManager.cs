@@ -49,7 +49,7 @@ public class GUIManager : MonoBehaviour {
 
 
 		//textStyle = new GUIStyle ();
-		textStyle.fontSize = 16;
+		textStyle.fontSize = 22;
 
 	}
 	
@@ -113,7 +113,7 @@ public class GUIManager : MonoBehaviour {
 	void OnGUI() {
 
 		
-		GUI.Box(new Rect(sWidth * 70,sHeight * 20.3f,150,30), "Money: "+towerPlacement.money.ToString()+"$",textStyle);
+		GUI.Box(new Rect(sWidth * 51.5f,sHeight * 10,150,30), "Credits: "+towerPlacement.money.ToString()+"$",textStyle);
 
 
 		if (!endTutorial)
