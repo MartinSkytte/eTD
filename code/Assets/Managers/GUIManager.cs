@@ -113,24 +113,18 @@ public class GUIManager : MonoBehaviour {
 	void OnGUI() {
 
 		
-		GUI.Box(new Rect(sWidth * 70,sHeight * 20.3f,150,30), "Money: "+towerPlacement.money.ToString()+"$",textStyle);
+		GUI.Box(new Rect(sWidth * 60,sHeight * 13f,150,30), "Money: "+towerPlacement.money.ToString()+"$",textStyle);
 
 
 		if (!endTutorial)
 		{
-
-
-			spawn.wavesEnabled = true;
-			spawn.nextWave();			
-
-
 			for (int i = 0; i < towers.Length; i++) {
 				if (GUI.Button (new Rect (sWidth*50,sHeight * 33 + sHeight*i*13, 100, 30), towers [i].name + " (10$)")) {
 					towerPlacement.setItem (towers [i]);
 				}	
 			}
 
-			if(GUI.Button(new Rect(sWidth*50,sHeight * 10,100,30), nextWaveText)) {
+			if(GUI.Button(new Rect(sWidth*50,sHeight * 20,100,30), nextWaveText)) {
 				spawn.wavesEnabled = true;
 				spawn.nextWave();			
 			}
