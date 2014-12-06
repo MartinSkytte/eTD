@@ -14,7 +14,7 @@ public class TowerPlacement : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		cam = GameObject.Find ("Camera").camera;
-		mt = GameObject.Find ("GameObject").GetComponent<Match3> ();
+		mt = GameObject.Find ("Match3Object").GetComponent<Match3> ();
 	}
 	
 	// Update is called once per frame

@@ -29,22 +29,24 @@ public class Match3 : MonoBehaviour {
 
 	public float scale = 0;
 	
-
-
 	public float timeLeft;
-	
+
+	private bool firstTime;
+
 	void Start(){
-		GameEventManager.GameWon += GameWon;
+
 		GameEventManager.GameOver += GameOver;
 		GameEventManager.GameStart += GameStart;
+
 		board = new int[10,10];
 		GenBoard();
 
 		paused = true;
 
+		firstTime = true;
+
 		newgame = true;
 		GameStart ();
-		Debug.Log ("goal:"+  goal);
 	}
 
 
@@ -52,25 +54,14 @@ public class Match3 : MonoBehaviour {
 	{
 		return goal;
 	}
-
-	void GameWon(){
-		Debug.Log("Game Won called");
-		GUIManager.endMatchTutorial ();
-		CreditManager();
-		timeLeft = 0;
-		renderer.enabled = false;
-		enabled = false;
-	}
-
 	void CreditManager(){
 		scale = (float)score / (float)goal;
-		Debug.Log ("scale:" + scale + "score:" + score + "goal:" + goal);
 		if (goal != 0) {
 						if (scale > 2 || scale <= 0) {
 								credits += 0;		
 						} else {
-								credits += (int)Mathf.FloorToInt (100 * (2 - 2*scale));
-								Debug.Log ("credits:" + credits);
+								credits += (int)Mathf.FloorToInt (50 * (2 - scale));
+				Debug.Log("credits" + credits);
 						}
 			GUIManager.SetCredits (credits);
 			newgame = true;
@@ -78,34 +69,30 @@ public class Match3 : MonoBehaviour {
 	}
 
 	void GameOver (){
-		Debug.Log("Game Over called");
-		GUIManager.endMatchTutorial ();
+		if (firstTime) {
+			GUIManager.endMatchTutorial ();
+			firstTime = false;
+		}
 		CreditManager();
 		timeLeft = 0;
 		renderer.enabled = true;
 		enabled = true;
 	}
 	
-	private void GameStart (){
+	public void GameStart (){
 		if (newgame == true) {
-						paused = false;
-						renderer.enabled = true;
-						enabled = true;
-						score = 0;
-						GUIManager.SetCurrentNumber (score);
-						goal = Random.Range (10, 100);
-						GUIManager.SetGoalNumber (goal);
-						newgame = false;
-				}
+			paused = false;
+			renderer.enabled = true;
+			enabled = true;
+			score = 0;
+			GUIManager.SetCurrentNumber (score);
+			goal = Random.Range (10, 100);
+			GUIManager.SetGoalNumber (goal);
+			newgame = false;
+		}
 	}
 
 	void Update(){
-
-		if (Input.GetMouseButtonDown(1)) {
-			score = 0;
-			GUIManager.SetCurrentNumber(score);
-			GameEventManager.TriggerGameOver();	
-		}
 
 		//Select block effect
 		if(Block.select){
@@ -146,7 +133,6 @@ public class Match3 : MonoBehaviour {
 	
 	
 	void GenBoard(){
-		
 		for(int x=0; x<board.GetLength(0); x++){
 			for(int y=0; y<board.GetLength(1); y++){
 				int randomNumber = Random.Range(0,4); //ID

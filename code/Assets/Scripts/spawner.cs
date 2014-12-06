@@ -56,6 +56,7 @@ public class spawner : MonoBehaviour {
 
 	public void nextWave(){
 		try {
+			GUIManager.endTDTutorial();
 			currentWave++;
 			if ((levelInfo.Count-1) < currentWave) {
 				Debug.Log("GAME OVER");

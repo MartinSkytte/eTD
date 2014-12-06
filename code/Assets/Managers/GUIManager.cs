@@ -5,9 +5,7 @@ public class GUIManager : MonoBehaviour {
 	
 	public GUIText CurrentNumberText, GoalNumberText, CreditsText;
 
-	public Canvas matchTutorial, towerTutorial;
-
-	public GUIStyle buttonStyle, textStyle;
+	public GUIStyle textStyle;
 
 	private static GUIManager instance;
 	private bool firstRun;
@@ -18,32 +16,40 @@ public class GUIManager : MonoBehaviour {
 	private spawner spawn;
 
 	private string nextWaveText;
-	
+
+	public static GameObject TDTutorial;
+	public static GameObject MatchTutorial;
+
+	//public static GameObject TDTutorial = GameObject.FindGameObjectWithTag("TDTutorial");
+	//public static GameObject MatchTutorial = GameObject.FindGameObjectWithTag("MatchTutorial");
+
 	//TowerGUI variables
 	private BasicTower tower;
 	private bool showTowerMenu;
-	private static bool mTutorial;
 	public static float sWidth, sHeight;
+	static bool endTutorial;
 
 	// Use this for initialization
 	void Start () {
+		TDTutorial = GameObject.FindGameObjectWithTag("TDTutorial");
+		GUIManager.MatchTutorial = GameObject.FindGameObjectWithTag("MatchTutorial");
+		GUIManager.TDTutorial.SetActive(false);
+
 		towerPlacement = GameObject.Find ("Managers").GetComponent<TowerPlacement> ();
 		spawn = GameObject.Find("Spawn").GetComponent<spawner>();
-		//this.SetCurrentNumber (0);
 	 	instance = this;
 		sWidth = Screen.width/100;
 		sHeight = Screen.height/100;
 
 		CreditsText.enabled = false;
+		endTutorial = true;
 
-		GameObject.FindGameObjectWithTag("TDTutorial").SetActive(false);
-		mTutorial = true;
-		GameEventManager.GameWon += GameWon;
+
 		GameEventManager.GameOver += GameOver;
 		GameEventManager.GameStart += GameStart;
-		buttonStyle = new GUIStyle(GUI.skin.button);
 
-		textStyle = new GUIStyle ();
+
+		//textStyle = new GUIStyle ();
 		textStyle.fontSize = 20;
 	}
 	
@@ -54,19 +60,22 @@ public class GUIManager : MonoBehaviour {
 		}
 	}
 
-	public static void endMatchTutorial(){
-		mTutorial = false;
-		GameObject.FindGameObjectWithTag("MatchTutorial").SetActive(false);
-		//GameObject.FindGameObjectWithTag("TDTutorial").SetActive(true);
-	}
-	//public static void endTDTutorial(){
-	//	GameObject.FindGameObjectWithTag ("TDTutorial").SetActive (false);
-	
+	//public void startMatch3(){
+	//	/*GameObject match3object = */GameObject.FindGameObjectWithTag("Match3Object").SetActive (true);
 	//}
+
+	public static void endMatchTutorial(){
+		GUIManager.TDTutorial.SetActive(true);
+		GUIManager.MatchTutorial.SetActive(false);
+		endTutorial = false;
+	}
+	public static void endTDTutorial(){
+		GUIManager.TDTutorial.SetActive(false);
+	
+	}
 
 
 	public static void SetCurrentNumber(int currentN){
-		Debug.Log ("supposed to be writing");
 		instance.CurrentNumberText.text = "Score: " + currentN.ToString();
 	}
 	
@@ -97,24 +106,23 @@ public class GUIManager : MonoBehaviour {
 	}
 	
 	private void GameWon(){
+
 		enabled = true;
 	}
-
-	void popup(int windowID){
-
-		print ("clicked");
-	}
-
+	
 	void OnGUI() {
 
-		GUI.Box(new Rect(sWidth*50,sHeight*5,150,30), "Money: "+towerPlacement.money.ToString()+"$", textStyle);
-	
-		if (!mTutorial)
+		
+		GUI.Box(new Rect(Screen.width/2,Screen.height/20,150,30), "money: "+towerPlacement.money.ToString()+"$",textStyle);
+
+
+		if (!endTutorial)
 		{
-			if(GUI.Button(new Rect(sWidth*45,sHeight*18,100,30), nextWaveText)) {
-				spawn.wavesEnabled = true;
-				spawn.nextWave();			
-			}
+
+
+			spawn.wavesEnabled = true;
+			spawn.nextWave();			
+
 
 			for (int i = 0; i < towers.Length; i++) {
 				if (GUI.Button (new Rect (sWidth*45,sHeight * 33 + sHeight*i*13, 120, 30), towers [i].name + " (10$)")) {
@@ -123,7 +131,7 @@ public class GUIManager : MonoBehaviour {
 			}
 
 			if(instance.showTowerMenu){
-
+				//GUI.Box(new Rect(Screen.width/20,Screen.height/20 + Screen.height/12*10,100,30), tower.name,textStyle);
 				GUI.Box(new Rect(sWidth*45,sHeight*80 ,100,30), tower.name,textStyle);
 				if(GUI.Button(new Rect(sWidth*45,sHeight*90,100,30), "Upgrade:"+tower.upgradeCost+"$")) {
 					if(tower.upgradeCost <= towerPlacement.money){
@@ -136,7 +144,7 @@ public class GUIManager : MonoBehaviour {
 			
 		}
 	}
-	
-}
+}	
+
 
 
