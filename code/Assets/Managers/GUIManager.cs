@@ -119,7 +119,7 @@ public class GUIManager : MonoBehaviour {
 	}
 	
 	private void GameOver(){
-		enabled = true;
+		//enabled = true;
 		
 	}
 	
@@ -144,6 +144,7 @@ public class GUIManager : MonoBehaviour {
 			if (GUI.Button (new Rect (sWidth * 50, sHeight * 80, 100, 30), "New Game?")) 
 			{
 				//do things to start a new game
+				Debug.Log(Application.loadedLevel);
 				Application.LoadLevel(Application.loadedLevel);
 			}
 

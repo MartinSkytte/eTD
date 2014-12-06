@@ -54,17 +54,18 @@ public class Match3 : MonoBehaviour {
 	{
 		return goal;
 	}
+
 	void CreditManager(){
 		scale = (float)score / (float)goal;
 		if (goal != 0) {
-						if (scale > 2 || scale <= 0) {
-								credits += 0;		
-						} else {
-								credits += (int)Mathf.FloorToInt (50 * (2 - scale));
-						}
-			newgame = true;
-			}
+			if (scale > 2 || scale <= 0) {
+				credits += 0;		
+		} else {
+			credits += (int)Mathf.FloorToInt (50 * (2 - scale));
+		}
+		newgame = true;
 	}
+}
 
 	void GameOver (){
 		if (firstTime) {
@@ -72,16 +73,16 @@ public class Match3 : MonoBehaviour {
 			firstTime = false;
 		}
 		CreditManager();
-		timeLeft = 0;
-		renderer.enabled = true;
-		enabled = true;
+		//timeLeft = 0;
+		//renderer.enabled = true;
+		//enabled = true;
 	}
 	
 	public void GameStart (){
 		if (newgame == true) {
 			paused = false;
-			renderer.enabled = true;
-			enabled = true;
+			//renderer.enabled = true;
+			//enabled = true;
 			score = 0;
 			GUIManager.SetCurrentNumber (score);
 			goal = Random.Range (10, 60);
