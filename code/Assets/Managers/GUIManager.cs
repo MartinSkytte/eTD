@@ -118,8 +118,16 @@ public class GUIManager : MonoBehaviour {
 		
 		GUI.Box(new Rect(sWidth * 51.5f,sHeight * 10,150,30), "Credits: "+towerPlacement.money.ToString()+"$",textStyle);
 		GUI.Box (new Rect (sWidth * 51.5f+150, sHeight * 10, 150, 30), "Lives: " + lives.ToString () , textStyle);
-
-		if (!endTutorial)
+		if (gameOver) 
+		{
+			spawn.wavesEnabled = false;
+			GUI.Box (new Rect (sWidth * 10, sHeight * 30, sWidth * 80, sHeight * 40), "GAME OVER", gameOverStyle);
+			if (GUI.Button (new Rect (sWidth * 45, sHeight * 80, 100, 30), "New Game?")) 
+			{
+				//do things to start a new game
+			}
+		}
+		if (!endTutorial && !gameOver)
 		{
 			for (int i = 0; i < towers.Length; i++) {
 				if (GUI.Button (new Rect (sWidth*13 + 105*i,sHeight * 18 , 100, 30), towers [i].name + " (10$)")) {
