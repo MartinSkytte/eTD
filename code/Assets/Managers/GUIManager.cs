@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
 
 public class GUIManager : MonoBehaviour {
 	
@@ -11,6 +13,7 @@ public class GUIManager : MonoBehaviour {
 	private bool firstRun;
 	
 	public GameObject[] towers;
+	public int[] towerPrices;
 	
 	private TowerPlacement towerPlacement;
 	private spawner spawn;
@@ -19,6 +22,8 @@ public class GUIManager : MonoBehaviour {
 
 	public static GameObject TDTutorial;
 	public static GameObject MatchTutorial;
+
+	private GameObject tmpTower;
 
 	//public static GameObject TDTutorial = GameObject.FindGameObjectWithTag("TDTutorial");
 	//public static GameObject MatchTutorial = GameObject.FindGameObjectWithTag("MatchTutorial");
@@ -43,7 +48,7 @@ public class GUIManager : MonoBehaviour {
 		sHeight = Screen.height/100;
 		
 		endTutorial = true;
-
+		
 
 		GameEventManager.GameOver += GameOver;
 		GameEventManager.GameStart += GameStart;
@@ -122,7 +127,7 @@ public class GUIManager : MonoBehaviour {
 		if (!endTutorial)
 		{
 			for (int i = 0; i < towers.Length; i++) {
-				if (GUI.Button (new Rect (sWidth*13 + 105*i,sHeight * 18 , 100, 30), towers [i].name + " (10$)")) {
+				if (GUI.Button (new Rect (sWidth*13 + 105*i,sHeight * 18 , 100, 30), towers [i].name + " ("+towerPrices[i]+"$)")) {
 					towerPlacement.setItem (towers [i]);
 				}	
 			}

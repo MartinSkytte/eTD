@@ -39,12 +39,13 @@ public class TowerPlacement : MonoBehaviour {
 
 	public void setItem(GameObject t){
 		tempTower = (GameObject)Instantiate (t);
-		if (tempTower.transform.GetComponentInChildren<TowerBase>().price <= mt.credits) {
-
+		if (tempTower.transform.GetComponentInChildren<TowerBase> ().price <= mt.credits) {
 			hasPlaced = false;
 			currentTower = tempTower.transform;
 			towerBase = currentTower.GetComponentInChildren<TowerBase> ();
 			mt.credits -= towerBase.price;
+		} else {
+			Destroy(tempTower);
 		}
 	}
 
