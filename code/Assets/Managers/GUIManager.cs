@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
 
 public class GUIManager : MonoBehaviour {
 	
@@ -11,6 +13,7 @@ public class GUIManager : MonoBehaviour {
 	private bool firstRun;
 	
 	public GameObject[] towers;
+	public int[] towerPrices;
 	
 	private TowerPlacement towerPlacement;
 	private spawner spawn;
@@ -19,6 +22,8 @@ public class GUIManager : MonoBehaviour {
 
 	public static GameObject TDTutorial;
 	public static GameObject MatchTutorial;
+
+	private GameObject tmpTower;
 
 	//public static GameObject TDTutorial = GameObject.FindGameObjectWithTag("TDTutorial");
 	//public static GameObject MatchTutorial = GameObject.FindGameObjectWithTag("MatchTutorial");
@@ -43,7 +48,7 @@ public class GUIManager : MonoBehaviour {
 		sHeight = Screen.height/100;
 		
 		endTutorial = true;
-
+		
 
 		GameEventManager.GameOver += GameOver;
 		GameEventManager.GameStart += GameStart;
@@ -96,7 +101,9 @@ public class GUIManager : MonoBehaviour {
 	
 	public static void showTowerGUI(GameObject selected){
 		instance.showTowerMenu = true;
+		//(instance.tower.GetComponent ("Halo") as Behaviour).enabled = false;
 		instance.tower = selected.GetComponent<BasicTower>();
+		//(instance.tower.GetComponent ("Halo") as Behaviour).enabled = true;
 	}
 	
 	private void GameOver(){
@@ -125,12 +132,14 @@ public class GUIManager : MonoBehaviour {
 			if (GUI.Button (new Rect (sWidth * 50, sHeight * 80, 100, 30), "New Game?")) 
 			{
 				//do things to start a new game
+				Application.LoadLevel(Application.loadedLevel);
 			}
+
 		}
 		if (!endTutorial && !gameOver)
 		{
 			for (int i = 0; i < towers.Length; i++) {
-				if (GUI.Button (new Rect (sWidth*5 + 165*i,sHeight * 18 , 160, 30), towers [i].name + " (10$)")) {
+				if (GUI.Button (new Rect (sWidth*13 + 105*i,sHeight * 18 , 100, 30), towers [i].name + " ("+towerPrices[i]+"$)")) {
 					towerPlacement.setItem (towers [i]);
 				}	
 			}
