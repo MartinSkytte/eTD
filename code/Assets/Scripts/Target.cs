@@ -9,6 +9,7 @@ public class Target : MonoBehaviour
 				if (c.gameObject.tag == "Enemy") {
 						Destroy (c.gameObject);
 						spawner.unitsInWave--;
+						GUIManager.lives--;
 				}
 		}
 }

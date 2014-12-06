@@ -5,7 +5,7 @@ public class GUIManager : MonoBehaviour {
 	
 	public GUIText CurrentNumberText, GoalNumberText;
 
-	public GUIStyle textStyle;
+	public GUIStyle textStyle, gameOverStyle;
 
 	private static GUIManager instance;
 	private bool firstRun;
@@ -24,11 +24,12 @@ public class GUIManager : MonoBehaviour {
 	//public static GameObject MatchTutorial = GameObject.FindGameObjectWithTag("MatchTutorial");
 
 	//TowerGUI variables
+	public bool gameOver;
 	private BasicTower tower;
 	private bool showTowerMenu;
 	public static float sWidth, sHeight;
 	static bool endTutorial;
-
+	public static int lives;
 	// Use this for initialization
 	void Start () {
 		TDTutorial = GameObject.FindGameObjectWithTag("TDTutorial");
@@ -47,10 +48,10 @@ public class GUIManager : MonoBehaviour {
 		GameEventManager.GameOver += GameOver;
 		GameEventManager.GameStart += GameStart;
 
-
+		lives = 20;
 		//textStyle = new GUIStyle ();
 		textStyle.fontSize = 22;
-
+		gameOver = false;
 	}
 	
 	// Update is called once per frame
@@ -58,6 +59,8 @@ public class GUIManager : MonoBehaviour {
 		if (Input.GetMouseButtonDown(0)) {
 			GameEventManager.TriggerGameStart ();
 		}
+		if (lives < 1)
+			gameOver = true;
 	}
 
 	//public void startMatch3(){
@@ -114,7 +117,7 @@ public class GUIManager : MonoBehaviour {
 
 		
 		GUI.Box(new Rect(sWidth * 51.5f,sHeight * 10,150,30), "Credits: "+towerPlacement.money.ToString()+"$",textStyle);
-
+		GUI.Box (new Rect (sWidth * 51.5f+150, sHeight * 10, 150, 30), "Lives: " + lives.ToString () , textStyle);
 
 		if (!endTutorial)
 		{

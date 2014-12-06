@@ -84,7 +84,7 @@ public class Match3 : MonoBehaviour {
 			enabled = true;
 			score = 0;
 			GUIManager.SetCurrentNumber (score);
-			goal = Random.Range (10, 100);
+			goal = Random.Range (10, 60);
 			GUIManager.SetGoalNumber (goal);
 			newgame = false;
 		}
