@@ -22,7 +22,7 @@ public class GUIManager : MonoBehaviour {
 
 	public static GameObject TDTutorial;
 	public static GameObject MatchTutorial;
-
+	public GameObject selectedIndicator;
 	private GameObject tmpTower;
 
 	//public static GameObject TDTutorial = GameObject.FindGameObjectWithTag("TDTutorial");
@@ -35,6 +35,8 @@ public class GUIManager : MonoBehaviour {
 	public static float sWidth, sHeight;
 	static bool endTutorial;
 	public static int lives;
+	private int current, goal;
+	public bool endTDFlag;
 	// Use this for initialization
 	void Start () {
 		TDTutorial = GameObject.FindGameObjectWithTag("TDTutorial");
@@ -48,7 +50,7 @@ public class GUIManager : MonoBehaviour {
 		sHeight = Screen.height/100;
 		
 		endTutorial = true;
-		
+		endTDFlag = false;
 
 		GameEventManager.GameOver += GameOver;
 		GameEventManager.GameStart += GameStart;
@@ -76,15 +78,22 @@ public class GUIManager : MonoBehaviour {
 		GUIManager.TDTutorial.SetActive(true);
 		GUIManager.MatchTutorial.SetActive(false);
 		endTutorial = false;
+		instance.CurrentNumberText.text = "";
+		instance.GoalNumberText.text = "";
+		instance.endTDFlag = true;
 	}
 	public static void endTDTutorial(){
+		instance.endTDFlag = false;
 		GUIManager.TDTutorial.SetActive(false);
-	
+		instance.CurrentNumberText.text = "Score: " + instance.current.ToString();
+		instance.GoalNumberText.text = "Goal: " + instance.goal.ToString();
 	}
 
 
 	public static void SetCurrentNumber(int currentN){
-		instance.CurrentNumberText.text = "Score: " + currentN.ToString();
+		instance.current = currentN;
+		if (!instance.endTDFlag)
+			instance.CurrentNumberText.text = "Score: " + currentN.ToString();
 	}
 	
 	public static void SetSpawnButtonText(string text) {
@@ -92,7 +101,9 @@ public class GUIManager : MonoBehaviour {
 	}
 
 	public static void SetGoalNumber(int goalN){
-		instance.GoalNumberText.text = "Goal: " + goalN.ToString();
+		instance.goal = goalN;
+		if (!instance.endTDFlag)
+			instance.GoalNumberText.text = "Goal: " + goalN.ToString();
 	}
 	
 	//public static void SetCredits(int credits){
@@ -103,6 +114,7 @@ public class GUIManager : MonoBehaviour {
 		instance.showTowerMenu = true;
 		//(instance.tower.GetComponent ("Halo") as Behaviour).enabled = false;
 		instance.tower = selected.GetComponent<BasicTower>();
+		instance.selectedIndicator.transform.position = instance.tower.transform.position;
 		//(instance.tower.GetComponent ("Halo") as Behaviour).enabled = true;
 	}
 	
@@ -123,8 +135,8 @@ public class GUIManager : MonoBehaviour {
 	void OnGUI() {
 
 		
-		GUI.Box(new Rect(sWidth * 51.5f,sHeight * 10,150,30), "Credits: "+towerPlacement.money.ToString()+"$",textStyle);
-		GUI.Box (new Rect (sWidth * 51.5f+150, sHeight * 10, 150, 30), "Lives: " + lives.ToString () , textStyle);
+		GUI.Box(new Rect(sWidth * 65f,sHeight * 10,150,30), "Credits: "+towerPlacement.money.ToString()+"$",textStyle);
+		GUI.Box (new Rect (sWidth * 65f+150, sHeight * 10, 150, 30), "Lives: " + lives.ToString () , textStyle);
 		if (gameOver) 
 		{
 			spawn.wavesEnabled = false;
@@ -139,12 +151,12 @@ public class GUIManager : MonoBehaviour {
 		if (!endTutorial && !gameOver)
 		{
 			for (int i = 0; i < towers.Length; i++) {
-				if (GUI.Button (new Rect (sWidth*13 + 105*i,sHeight * 18 , 100, 30), towers [i].name + " ("+towerPrices[i]+"$)")) {
+				if (GUI.Button (new Rect (sWidth*4 + 165*i,sHeight * 18 , 160, 30), towers [i].name + " ("+towerPrices[i]+"$)")) {
 					towerPlacement.setItem (towers [i]);
 				}	
 			}
 
-			if(GUI.Button(new Rect(sWidth*50,sHeight * 20,100,30), nextWaveText)) {
+			if(GUI.Button(new Rect(sWidth*50,sHeight * 10,100,30), nextWaveText)) {
 				spawn.wavesEnabled = true;
 				spawn.nextWave();			
 			}
