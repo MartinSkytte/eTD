@@ -51,6 +51,7 @@ public class GUIManager : MonoBehaviour {
 
 		//textStyle = new GUIStyle ();
 		textStyle.fontSize = 20;
+
 	}
 	
 	// Update is called once per frame
@@ -128,6 +129,11 @@ public class GUIManager : MonoBehaviour {
 				if (GUI.Button (new Rect (sWidth*45,sHeight * 33 + sHeight*i*13, 120, 30), towers [i].name + " (10$)")) {
 					towerPlacement.setItem (towers [i]);
 				}	
+			}
+
+			if(GUI.Button(new Rect(sWidth*45,sHeight * 10,100,30), nextWaveText)) {
+				spawn.wavesEnabled = true;
+				spawn.nextWave();			
 			}
 
 			if(instance.showTowerMenu){
