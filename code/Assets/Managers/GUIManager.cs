@@ -113,7 +113,7 @@ public class GUIManager : MonoBehaviour {
 	void OnGUI() {
 
 		
-		GUI.Box(new Rect(Screen.width/2,Screen.height/20,150,30), "money: "+towerPlacement.money.ToString()+"$",textStyle);
+		GUI.Box(new Rect(Screen.width/2,Screen.height/20,150,30), "Money: "+towerPlacement.money.ToString()+"$",textStyle);
 
 
 		if (!endTutorial)
