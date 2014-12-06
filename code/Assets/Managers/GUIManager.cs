@@ -119,7 +119,7 @@ public class GUIManager : MonoBehaviour {
 		if (!endTutorial)
 		{
 			for (int i = 0; i < towers.Length; i++) {
-				if (GUI.Button (new Rect (sWidth*50,sHeight * 33 + sHeight*i*13, 100, 30), towers [i].name + " (10$)")) {
+				if (GUI.Button (new Rect (sWidth*13 + 105*i,sHeight * 18 , 100, 30), towers [i].name + " (10$)")) {
 					towerPlacement.setItem (towers [i]);
 				}	
 			}
@@ -131,8 +131,8 @@ public class GUIManager : MonoBehaviour {
 
 			if(instance.showTowerMenu){
 				//GUI.Box(new Rect(Screen.width/20,Screen.height/20 + Screen.height/12*10,100,30), tower.name,textStyle);
-				GUI.Box(new Rect(sWidth*50,sHeight*80 ,100,30), tower.name,textStyle);
-				if(GUI.Button(new Rect(sWidth*50,sHeight*90,100,30), "Upgrade:"+tower.upgradeCost+"$")) {
+				GUI.Box(new Rect(sWidth*13,sHeight*82 ,100,30), tower.name,textStyle);
+				if(GUI.Button(new Rect(sWidth*13+150,sHeight*82,100,30), "Upgrade:"+tower.upgradeCost+"$")) {
 					if(tower.upgradeCost <= towerPlacement.money){
 						towerPlacement.mt.credits -= tower.upgradeCost;
 						tower.upgradetower();			
