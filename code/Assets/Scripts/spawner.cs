@@ -13,12 +13,15 @@ public class spawner : MonoBehaviour {
 	private float spawnTimeLeft;
 	private int amount = 0;
 	private float countDown = 10;
+	private int waveCounter;
+	private Queue<int> wavesQueue = new Queue<int> ();
 
 	public static int unitsInWave = 0;
 	private static GUIManager instance;
 
 	// Use this for initialization
 	void Start () {
+		waveCounter = currentWave;
 		infoList = (LevelInfoList)gameObject.GetComponent<LevelInfoList> ();
 		levelInfo = infoList.levelsInfo;
 		GUIManager.SetSpawnButtonText ("Next wave");
@@ -29,6 +32,19 @@ public class spawner : MonoBehaviour {
 		if ((levelInfo.Count-1) < currentWave)
 			return;
 
+		if (amount <= 0 && wavesQueue.Count != 0) {
+			currentWave = wavesQueue.Dequeue();
+			Debug.Log("NEXT WAVE SPAWNING: " + currentWave);
+
+			if ((levelInfo.Count-1) < currentWave) {
+				Debug.Log("GAME OVER");
+				return;
+			}
+			spawnTime = levelInfo [currentWave].spawnTime;
+			spawnTimeLeft = spawnTime;
+			amount = levelInfo [currentWave].amount;
+			spawner.unitsInWave = amount;	
+		}
 
 		if (spawnTimeLeft <= 0 && amount != 0) {
 			GameObject creep = (GameObject)Instantiate(levelInfo[currentWave].creep, transform.position, transform.rotation);
@@ -57,15 +73,8 @@ public class spawner : MonoBehaviour {
 	public void nextWave(){
 		try {
 			GUIManager.endTDTutorial();
-			currentWave++;
-			if ((levelInfo.Count-1) < currentWave) {
-				Debug.Log("GAME OVER");
-				return;
-			}
-			spawnTime = levelInfo [currentWave].spawnTime;
-			spawnTimeLeft = spawnTime;
-			amount = levelInfo [currentWave].amount;
-			spawner.unitsInWave = amount;	
+			waveCounter++;
+			wavesQueue.Enqueue(waveCounter);
 		} catch (UnityException ue) {
 			Debug.Log(ue.Message);
 		}
