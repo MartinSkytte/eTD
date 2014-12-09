@@ -34,10 +34,11 @@ public class spawner : MonoBehaviour {
 
 		if (amount <= 0 && wavesQueue.Count != 0) {
 			currentWave = wavesQueue.Dequeue();
-			Debug.Log("NEXT WAVE SPAWNING: " + currentWave);
+			GUIManager.SetLevelNumber((currentWave+1));
 
 			if ((levelInfo.Count-1) < currentWave) {
 				Debug.Log("GAME OVER");
+				GUIManager.SetGameOver(true);
 				return;
 			}
 			spawnTime = levelInfo [currentWave].spawnTime;

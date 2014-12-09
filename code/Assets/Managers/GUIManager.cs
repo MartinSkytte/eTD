@@ -19,6 +19,7 @@ public class GUIManager : MonoBehaviour {
 	private spawner spawn;
 
 	private string nextWaveText;
+	private int currentLevel;
 
 	public static GameObject TDTutorial;
 	public static GameObject MatchTutorial;
@@ -95,7 +96,15 @@ public class GUIManager : MonoBehaviour {
 		if (!instance.endTDFlag)
 			instance.CurrentNumberText.text = "Score: " + currentN.ToString();
 	}
-	
+
+	public static void SetGameOver(bool gameover) {
+		instance.gameOver = gameover;
+	}
+
+	public static void SetLevelNumber(int level) {
+		instance.currentLevel = level;
+	}
+
 	public static void SetSpawnButtonText(string text) {
 		instance.nextWaveText = text;
 	}
@@ -137,6 +146,7 @@ public class GUIManager : MonoBehaviour {
 		
 		GUI.Box(new Rect(sWidth * 65f,sHeight * 10,150,30), "Credits: "+towerPlacement.money.ToString()+"$",textStyle);
 		GUI.Box (new Rect (sWidth * 65f+150, sHeight * 10, 150, 30), "Lives: " + lives.ToString () , textStyle);
+		GUI.Box (new Rect (sWidth * 65f+300, sHeight * 10, 150, 30), "Level: " + currentLevel.ToString () , textStyle);
 		if (gameOver) 
 		{
 			spawn.wavesEnabled = false;
