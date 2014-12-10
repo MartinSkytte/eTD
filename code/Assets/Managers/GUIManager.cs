@@ -145,8 +145,8 @@ public class GUIManager : MonoBehaviour {
 
 		
 		GUI.Box(new Rect(sWidth * 65f,sHeight * 10,150,30), "Credits: "+towerPlacement.money.ToString()+"$",textStyle);
-		GUI.Box (new Rect (sWidth * 65f+150, sHeight * 10, 150, 30), "Lives: " + lives.ToString () , textStyle);
-		GUI.Box (new Rect (sWidth * 65f+300, sHeight * 10, 150, 30), "Level: " + currentLevel.ToString () , textStyle);
+		GUI.Box (new Rect (sWidth * 65f+135, sHeight * 10, 150, 30), "Lives: " + lives.ToString () , textStyle);
+		GUI.Box (new Rect (sWidth * 65f+250, sHeight * 10, 150, 30), "Level: " + currentLevel.ToString () , textStyle);
 		if (gameOver) 
 		{
 			spawn.wavesEnabled = false;
