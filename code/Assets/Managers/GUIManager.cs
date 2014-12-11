@@ -7,7 +7,7 @@ public class GUIManager : MonoBehaviour {
 	
 	public GUIText CurrentNumberText, GoalNumberText;
 
-	public GUIStyle textStyle, gameOverStyle;
+	public GUIStyle textStyle, gameOverStyle, nextWaveStyle;
 
 	private static GUIManager instance;
 	private bool firstRun;
@@ -60,6 +60,7 @@ public class GUIManager : MonoBehaviour {
 		//textStyle = new GUIStyle ();
 		textStyle.fontSize = 22;
 		gameOver = false;
+
 	}
 	
 	// Update is called once per frame
@@ -144,9 +145,9 @@ public class GUIManager : MonoBehaviour {
 	void OnGUI() {
 
 		
-		GUI.Box(new Rect(sWidth * 65f,sHeight * 10,150,30), "Credits: "+towerPlacement.money.ToString()+"$",textStyle);
-		GUI.Box (new Rect (sWidth * 65f+135, sHeight * 10, 150, 30), "Lives: " + lives.ToString () , textStyle);
-		GUI.Box (new Rect (sWidth * 65f+250, sHeight * 10, 150, 30), "Level: " + currentLevel.ToString () , textStyle);
+		GUI.Box(new Rect(sWidth * 55f,sHeight * 10,150,30), "Credits: "+towerPlacement.money.ToString()+"$",textStyle);
+		GUI.Box (new Rect (sWidth * 55f+135, sHeight * 10, 150, 30), "Lives: " + lives.ToString () , textStyle);
+		GUI.Box (new Rect (sWidth * 55f+250, sHeight * 10, 150, 30), "Level: " + currentLevel.ToString () , textStyle);
 		if (gameOver) 
 		{
 			spawn.wavesEnabled = false;
@@ -167,7 +168,7 @@ public class GUIManager : MonoBehaviour {
 				}	
 			}
 
-			if(GUI.Button(new Rect(sWidth*50,sHeight * 10,100,30), nextWaveText)) {
+			if(GUI.Button(new Rect(sWidth*35,sHeight * 10,100,30), nextWaveText,nextWaveStyle)) {
 				spawn.wavesEnabled = true;
 				spawn.nextWave();			
 			}
