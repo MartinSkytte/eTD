@@ -1,0 +1,8 @@
+#N canvas 635 84 345 505 10;
+#X obj 126 100 Arrow1;
+#X obj 211 0 r TowerPos;
+#X obj 126 15 r TowerBang;
+#X floatatom 193 46 5 0 0 0 - - -;
+#X connect 1 0 3 0;
+#X connect 2 0 0 0;
+#X connect 3 0 0 1;

@@ -1,0 +1,60 @@
+Initialize engine version: 4.6.1f1 (d1db7a1b5196)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: Intel(R) HD Graphics 4000 (ID=0x166)
+    Vendor:   Intel
+    VRAM:     128 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Hal\eTD\eTD_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Hal\eTD\eTD_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Hal\eTD\eTD_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Hal\eTD\eTD_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Hal\eTD\eTD_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Hal\eTD\eTD_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Hal\eTD\eTD_Data\Managed\Pathfinding.Ionic.Zip.Reduced.dll (this message is harmless)
+Loading C:\Users\Hal\eTD\eTD_Data\Managed\Pathfinding.Ionic.Zip.Reduced.dll into Unity Child Domain
+Platform assembly: C:\Users\Hal\eTD\eTD_Data\Managed\Pathfinding.JsonFx.dll (this message is harmless)
+Loading C:\Users\Hal\eTD\eTD_Data\Managed\Pathfinding.JsonFx.dll into Unity Child Domain
+- Completed reload, in  0.055 seconds
+desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
+<RI> Initializing input.
+XInput1_3.dll not found.
+<RI> Input initialized.
+Platform assembly: C:\Users\Hal\eTD\eTD_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Hal\eTD\eTD_Data\Managed\System.dll (this message is harmless)
+Loading patch:C:/Users/Hal/eTD/eTD_Data/StreamingAssets/PdAssets/SFX.pd
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+IndexOutOfRangeException: Array index is out of range.
+  at BasicTower.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+wallcount 1
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+IndexOutOfRangeException: Array index is out of range.
+  at BasicTower.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+IndexOutOfRangeException: Array index is out of range.
+  at BasicTower.Update () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+

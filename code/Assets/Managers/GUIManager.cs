@@ -161,8 +161,8 @@ public class GUIManager : MonoBehaviour {
 			}
 
 			if(instance.showTowerMenu){
-				GUI.Box(new Rect(sWidth*13,sHeight*82 ,100,30), tower.name,textStyle);
-				if(GUI.Button(new Rect(sWidth*13+150,sHeight*82,100,30), "Upgrade:"+tower.upgradeCost+"$")) {
+				GUI.Box(new Rect(sWidth*13,sHeight*88 ,100,30), tower.name,textStyle);
+				if(GUI.Button(new Rect(sWidth*13+150,sHeight*88,100,30), "Upgrade:"+tower.upgradeCost+"$")) {
 					if(tower.upgradeCost <= towerPlacement.money){
 						towerPlacement.mt.credits -= tower.upgradeCost;
 						tower.upgradetower();			
