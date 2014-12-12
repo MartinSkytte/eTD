@@ -26,9 +26,6 @@ public class GUIManager : MonoBehaviour {
 	public GameObject selectedIndicator;
 	private GameObject tmpTower;
 
-	//public static GameObject TDTutorial = GameObject.FindGameObjectWithTag("TDTutorial");
-	//public static GameObject MatchTutorial = GameObject.FindGameObjectWithTag("MatchTutorial");
-
 	//TowerGUI variables
 	public bool gameOver;
 	private BasicTower tower;
@@ -57,7 +54,6 @@ public class GUIManager : MonoBehaviour {
 		GameEventManager.GameStart += GameStart;
 
 		lives = 20;
-		//textStyle = new GUIStyle ();
 		textStyle.fontSize = 22;
 		gameOver = false;
 
@@ -72,9 +68,6 @@ public class GUIManager : MonoBehaviour {
 			gameOver = true;
 	}
 
-	//public void startMatch3(){
-	//	/*GameObject match3object = */GameObject.FindGameObjectWithTag("Match3Object").SetActive (true);
-	//}
 
 	public static void endMatchTutorial(){
 		GUIManager.TDTutorial.SetActive(true);
@@ -115,26 +108,20 @@ public class GUIManager : MonoBehaviour {
 		if (!instance.endTDFlag)
 			instance.GoalNumberText.text = "Goal: " + goalN.ToString();
 	}
-	
-	//public static void SetCredits(int credits){
-		//instance.CreditsText.text = credits.ToString ()+ "$";
-	//}
+
 	
 	public static void showTowerGUI(GameObject selected){
 		instance.showTowerMenu = true;
-		//(instance.tower.GetComponent ("Halo") as Behaviour).enabled = false;
 		instance.tower = selected.GetComponent<BasicTower>();
 		instance.selectedIndicator.transform.position = instance.tower.transform.position;
-		//(instance.tower.GetComponent ("Halo") as Behaviour).enabled = true;
 	}
 	
 	private void GameOver(){
-		//enabled = true;
-		
+
 	}
 	
 	private void GameStart(){
-		//enabled = false;
+
 	}
 	
 	private void GameWon(){
@@ -174,7 +161,6 @@ public class GUIManager : MonoBehaviour {
 			}
 
 			if(instance.showTowerMenu){
-				//GUI.Box(new Rect(Screen.width/20,Screen.height/20 + Screen.height/12*10,100,30), tower.name,textStyle);
 				GUI.Box(new Rect(sWidth*13,sHeight*82 ,100,30), tower.name,textStyle);
 				if(GUI.Button(new Rect(sWidth*13+150,sHeight*82,100,30), "Upgrade:"+tower.upgradeCost+"$")) {
 					if(tower.upgradeCost <= towerPlacement.money){
