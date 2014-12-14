@@ -8,7 +8,7 @@ public class BasicTower : MonoBehaviour {
 	public GameObject projectile;
 	public float reloadTime = 1;
 	public int upgradeCost = 10;
-
+	public bool isPlaced = false;
 //	private Queue<Transform> targets = new Queue<Transform>();
 
 	private float nextFireTime;
