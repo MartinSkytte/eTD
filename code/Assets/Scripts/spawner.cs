@@ -34,6 +34,8 @@ public class spawner : MonoBehaviour {
 
 		if (amount <= 0 && wavesQueue.Count != 0) {
 			currentWave = wavesQueue.Dequeue();
+			countDown = 10.0f;
+			GUIManager.SetSpawnButtonText ("Next wave");
 			GUIManager.SetLevelNumber((currentWave+1));
 
 			if ((levelInfo.Count-1) < currentWave) {
@@ -44,7 +46,7 @@ public class spawner : MonoBehaviour {
 			spawnTime = levelInfo [currentWave].spawnTime;
 			spawnTimeLeft = spawnTime;
 			amount = levelInfo [currentWave].amount;
-			spawner.unitsInWave = amount;	
+			spawner.unitsInWave = amount;
 		}
 
 		if (spawnTimeLeft <= 0 && amount != 0) {
