@@ -32,7 +32,8 @@
 #X connect 12 0 4 0;
 #X restore 82 55 pd CubeSolve;
 #X obj 83 2 inlet;
-#X obj 96 139 dac~;
+#X obj 54 156 outlet~;
+#X obj 134 167 outlet~;
 #X connect 0 0 2 0;
-#X connect 0 0 2 1;
+#X connect 0 0 3 0;
 #X connect 1 0 0 0;
