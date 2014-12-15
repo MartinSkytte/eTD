@@ -1,0 +1,10 @@
+#N canvas 960 231 450 300 10;
+#X obj 198 92 synth~ synth-1;
+#X obj 94 93 synth~ synth-2;
+#X obj 51 12 r synth-1-set-frequency;
+#X obj 51 36 r synth-2-set-frequency;
+#X obj 144 170 dac~;
+#X connect 0 0 4 0;
+#X connect 0 0 4 1;
+#X connect 1 0 4 1;
+#X connect 1 0 4 0;
