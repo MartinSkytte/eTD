@@ -351,7 +351,6 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Priority: 3
   ignoreReversedGraphics: 1
   blockingObjects: 0
   m_BlockingMask:
@@ -561,9 +560,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Now that you a few credits, we can start playing\n\n\t\t\t\t\t\t\tTower
+  m_Text: "Now that you a have few credits, we can start playing\n\n\t\t\t\t\t\t\tTower
     Defense!!\n\nChoose the tower you want to place and then simply place it on the
-    grey walls.\nAnd when you have the towers you want press the \"Next Wave\" button
+    white walls.\nAnd when you have the towers you want press the \"Next Wave\" button
     and lets see if you can defeat all the creeps...\nAfter having the first wave
     the next one will automatically come after 20 seconds. If you need more towers
     then you have to win credits by playing MATCH 3 !!\n\nGood luck and may the creeps
@@ -24002,7 +24001,6 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Priority: 3
   ignoreReversedGraphics: 1
   blockingObjects: 0
   m_BlockingMask:
