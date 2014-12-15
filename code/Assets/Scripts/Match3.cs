@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using LibPDBinding;
 
 public class Match3 : MonoBehaviour {
 	
@@ -374,6 +375,7 @@ public class Match3 : MonoBehaviour {
 				GameEventManager.TriggerGameOver();
 			}
 			//blocksDestroyed = 0;
+			LibPD.SendMessage("StrumBang","bang");
 			return true;
 		}
 		

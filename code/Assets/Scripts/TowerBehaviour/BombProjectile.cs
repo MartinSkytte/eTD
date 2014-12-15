@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using LibPDBinding;
 
 public class BombProjectile : MonoBehaviour {
 	
@@ -22,6 +23,8 @@ public class BombProjectile : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider c){
 		if (c.gameObject.transform.tag == "Enemy") {
+			LibPD.SendMessage("BoomPos", "float", (this.transform.position.x-20)/40);
+			LibPD.SendMessage("BoomBang","bang");
 			Explode();
 		}
 	}
@@ -29,6 +32,9 @@ public class BombProjectile : MonoBehaviour {
 	void Explode(){
 		Collider[] hitColliders = Physics.OverlapSphere(this.transform.position, blastRadius);
 		int i = 0;
+
+
+
 		while (i < hitColliders.Length) {
 			if (hitColliders[i].gameObject.transform.tag == "Enemy") {
 				hitColliders[i].GetComponent<UnitHealth>().TakeDamage(damage);

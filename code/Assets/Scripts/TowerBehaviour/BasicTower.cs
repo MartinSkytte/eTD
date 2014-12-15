@@ -52,7 +52,8 @@ public class BasicTower : MonoBehaviour {
 					nextFireTime = Time.time + reloadTime;
 					this.transform.LookAt(targets[i].transform.position);
 					Instantiate (projectile, transform.position, transform.rotation);
-					LibPD.SendMessage("TowerPos", "float", 0.5);
+					
+					LibPD.SendMessage("TowerPos", "float", (this.transform.position.x-20)/40);
 					LibPD.SendMessage("TowerBang","bang");
 				}	
 		}

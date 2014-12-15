@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using LibPDBinding;
 
 //using UnityEngine;
 //using System.Collections;
@@ -43,6 +44,8 @@ public class Block : MonoBehaviour {
 		//Select objects
 		if(Input.GetMouseButtonDown(0)){
 			if(!select){
+				LibPD.SendMessage("CubePos", "float", (this.transform.position.x/15)+0.5f);
+				LibPD.SendMessage("CubeBang","bang");
 				select = transform;
 			}
 			else if(select != transform && !moveTo ){ //If one block selected, then check if we are not selecting same block again, select second block

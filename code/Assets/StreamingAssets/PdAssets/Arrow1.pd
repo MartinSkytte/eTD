@@ -1,6 +1,6 @@
 #N canvas 586 94 345 505 10;
 #X obj 80 -125 inlet;
-#N canvas 198 217 583 300 ArrowSound 1;
+#N canvas 198 217 583 300 ArrowSound 0;
 #X obj 208 46 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
 #X obj 142 158 vline~;
@@ -56,21 +56,22 @@
 #X obj 109 66 *~;
 #X obj 178 47 *~;
 #X obj 164 2 -;
-#X floatatom 30 -22 5 0 0 0 - - -;
 #X floatatom 230 -39 5 0 0 0 - - -;
 #X obj 135 -81 del 1;
 #X obj 58 -78 del 2;
+#X obj 41 -19 1;
 #X connect 0 0 6 0;
+#X connect 0 0 8 0;
 #X connect 0 0 9 0;
-#X connect 0 0 10 0;
 #X connect 1 0 4 0;
 #X connect 1 0 5 0;
 #X connect 3 0 5 1;
 #X connect 3 0 6 1;
-#X connect 3 0 8 0;
+#X connect 3 0 7 0;
 #X connect 4 0 2 0;
 #X connect 5 0 2 1;
 #X connect 6 0 4 1;
-#X connect 7 0 6 0;
-#X connect 9 0 6 0;
-#X connect 10 0 1 0;
+#X connect 8 0 6 0;
+#X connect 8 0 10 0;
+#X connect 9 0 1 0;
+#X connect 10 0 6 0;
