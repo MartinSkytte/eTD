@@ -351,6 +351,7 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Priority: 3
   ignoreReversedGraphics: 1
   blockingObjects: 0
   m_BlockingMask:
@@ -860,7 +861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49a1f5554a6e6c5428b3c3d16458ec3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameOfPatch: SFX.pd
+  nameOfPatch: mainPatch.pd
 --- !u!1 &282112644
 GameObject:
   m_ObjectHideFlags: 0
@@ -24001,6 +24002,7 @@ MonoBehaviour:
   m_Script: {fileID: 1301386320, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Priority: 3
   ignoreReversedGraphics: 1
   blockingObjects: 0
   m_BlockingMask:

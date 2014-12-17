@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using LibPDBinding;
 
 
 public class GUIManager : MonoBehaviour {
@@ -20,6 +21,9 @@ public class GUIManager : MonoBehaviour {
 
 	private string nextWaveText;
 	private int currentLevel;
+	public float sfxVolume = 1.0f;
+	public float musicVolume = 1.0f;
+	public float masterVolume = 1.0f;
 
 	public static GameObject TDTutorial;
 	public static GameObject MatchTutorial;
@@ -58,7 +62,8 @@ public class GUIManager : MonoBehaviour {
 		gameOver = false;
 
 	}
-	
+	private int updateSound;
+
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetMouseButtonDown(0)) {
@@ -66,6 +71,16 @@ public class GUIManager : MonoBehaviour {
 		}
 		if (lives < 1)
 			gameOver = true;
+
+		//only every 50th update to not take up to many rescources.
+		if (updateSound > 50) {
+			LibPD.SendMessage ("sfxVolume", "float", sfxVolume);
+			LibPD.SendMessage ("musicVolume", "float", musicVolume);
+			LibPD.SendMessage ("masterVolume", "float", masterVolume);
+			updateSound = 0;
+		} else {
+			updateSound++;	
+		}
 	}
 
 
@@ -131,7 +146,13 @@ public class GUIManager : MonoBehaviour {
 	
 	void OnGUI() {
 
-		
+		sfxVolume = GUI.HorizontalSlider(new Rect(25, 25, 100, 30), sfxVolume, 0.0F, 1.0F);
+		GUI.Box (new Rect(120, 15, 100, 30),"sfx");
+		musicVolume = GUI.HorizontalSlider(new Rect(25, 50, 100, 30), musicVolume, 0.0F, 1.0F);
+		GUI.Box (new Rect(120, 40, 100, 30),"music");
+		masterVolume = GUI.HorizontalSlider(new Rect(25, 75, 100, 30), masterVolume, 0.0F, 1.0F);
+		GUI.Box (new Rect(120, 65, 100, 30),"master");
+
 		GUI.Box(new Rect(sWidth * 55f,sHeight * 10,150,30), "Credits: "+towerPlacement.money.ToString()+"$",textStyle);
 		GUI.Box (new Rect (sWidth * 55f+145, sHeight * 10, 150, 30), "Lives: " + lives.ToString () , textStyle);
 		GUI.Box (new Rect (sWidth * 55f+260, sHeight * 10, 150, 30), "Level: " + currentLevel.ToString () , textStyle);
