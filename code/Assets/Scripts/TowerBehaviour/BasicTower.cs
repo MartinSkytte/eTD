@@ -48,14 +48,18 @@ public class BasicTower : MonoBehaviour {
 				}
 
 			}
-				if (Time.time >= nextFireTime) {
-					nextFireTime = Time.time + reloadTime;
-					this.transform.LookAt(targets[i].transform.position);
-					Instantiate (projectile, transform.position, transform.rotation);
-					
+			if (Time.time >= nextFireTime) {
+				nextFireTime = Time.time + reloadTime;
+				this.transform.LookAt(targets[i].transform.position);
+				Instantiate (projectile, transform.position, transform.rotation);
+				if((gameObject.name).Equals("BombTower")){
+					LibPD.SendMessage("bombTowerPos", "float", (this.transform.position.x-20)/40);
+					LibPD.SendMessage("bombTowerBang","bang");
+				}else{
 					LibPD.SendMessage("TowerPos", "float", (this.transform.position.x-20)/40);
 					LibPD.SendMessage("TowerBang","bang");
-				}	
+				}
+			}	
 		}
 	}
 

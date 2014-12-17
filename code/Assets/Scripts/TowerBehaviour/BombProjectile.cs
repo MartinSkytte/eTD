@@ -10,7 +10,10 @@ public class BombProjectile : MonoBehaviour {
 	public int blastRadius = 1;
 	
 	private float distance;
-	
+
+	void start(){
+	}
+
 	// Update is called once per frame
 	void Update () {
 		transform.Translate (Vector3.forward * Time.deltaTime * speed);
